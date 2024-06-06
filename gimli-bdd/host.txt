@@ -1,0 +1,5 @@
+host : pg-c87e60c-project-288f.f.aivencloud.com
+port : 21284
+user : avnadmin
+password : AVNS_mUdfKr72UkslzfKWaFJ
+mode ssl: require
