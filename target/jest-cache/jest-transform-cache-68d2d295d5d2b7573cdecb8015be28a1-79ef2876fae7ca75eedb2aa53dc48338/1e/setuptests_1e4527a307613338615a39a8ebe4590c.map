@@ -1,1 +1,0 @@
-{"file":"/Users/pcco056/Documents/Cours ITU/ribouchon/magicventestock/src/main/webapp/app/setup-tests.ts","mappings":";;AAAA,sDAAiD;AAEjD,IAAA,uBAAS,GAAE,CAAC","names":[],"sources":["/Users/pcco056/Documents/Cours ITU/ribouchon/magicventestock/src/main/webapp/app/setup-tests.ts"],"sourcesContent":["import { loadIcons } from './config/icon-loader';\n\nloadIcons();\n"],"version":3}

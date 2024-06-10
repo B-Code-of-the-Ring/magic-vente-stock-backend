@@ -1,1 +1,0 @@
-{"version":3,"names":["module","exports","isClean","Symbol","my"],"sources":["symbols.js"],"sourcesContent":["'use strict'\n\nmodule.exports.isClean = Symbol('isClean')\n\nmodule.exports.my = Symbol('my')\n"],"mappings":"AAAA,YAAY;;AAEZA,MAAM,CAACC,OAAO,CAACC,OAAO,GAAGC,MAAM,CAAC,SAAS,CAAC;AAE1CH,MAAM,CAACC,OAAO,CAACG,EAAE,GAAGD,MAAM,CAAC,IAAI,CAAC","ignoreList":[]}
