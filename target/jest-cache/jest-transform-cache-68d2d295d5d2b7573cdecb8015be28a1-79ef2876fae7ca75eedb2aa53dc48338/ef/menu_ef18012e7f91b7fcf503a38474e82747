@@ -1,0 +1,179 @@
+b20b889235284776e56195e49c9a7c9a
+"use strict";
+
+/* istanbul ignore next */
+function cov_1gblctcdm7() {
+  var path = "/Users/pcco056/Documents/Cours ITU/ribouchon/magicventestock/src/main/webapp/app/entities/menu.tsx";
+  var hash = "ac752ed17cccb51572987dac6721e43b2ed53075";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/Users/pcco056/Documents/Cours ITU/ribouchon/magicventestock/src/main/webapp/app/entities/menu.tsx",
+    statementMap: {
+      "0": {
+        start: {
+          line: 2,
+          column: 0
+        },
+        end: {
+          line: 2,
+          column: 62
+        }
+      },
+      "1": {
+        start: {
+          line: 3,
+          column: 16
+        },
+        end: {
+          line: 3,
+          column: 32
+        }
+      },
+      "2": {
+        start: {
+          line: 4,
+          column: 16
+        },
+        end: {
+          line: 4,
+          column: 57
+        }
+      },
+      "3": {
+        start: {
+          line: 5,
+          column: 20
+        },
+        end: {
+          line: 5,
+          column: 89
+        }
+      },
+      "4": {
+        start: {
+          line: 6,
+          column: 21
+        },
+        end: {
+          line: 10,
+          column: 1
+        }
+      },
+      "5": {
+        start: {
+          line: 7,
+          column: 4
+        },
+        end: {
+          line: 9,
+          column: 120
+        }
+      },
+      "6": {
+        start: {
+          line: 11,
+          column: 0
+        },
+        end: {
+          line: 11,
+          column: 31
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "(anonymous_0)",
+        decl: {
+          start: {
+            line: 6,
+            column: 21
+          },
+          end: {
+            line: 6,
+            column: 22
+          }
+        },
+        loc: {
+          start: {
+            line: 6,
+            column: 27
+          },
+          end: {
+            line: 10,
+            column: 1
+          }
+        },
+        line: 6
+      }
+    },
+    branchMap: {},
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0
+    },
+    f: {
+      "0": 0
+    },
+    b: {},
+    inputSourceMap: {
+      file: "/Users/pcco056/Documents/Cours ITU/ribouchon/magicventestock/src/main/webapp/app/entities/menu.tsx",
+      mappings: ";;;AAAA,0DAA0B;AAE1B,0FAAyD;AAEzD,MAAM,YAAY,GAAG,GAAG,EAAE;IACxB,OAAO,CACL;QAEE,8BAAC,mBAAQ,IAAC,IAAI,EAAC,UAAU,EAAC,EAAE,EAAC,UAAU,cAE5B;QACX,8BAAC,mBAAQ,IAAC,IAAI,EAAC,UAAU,EAAC,EAAE,EAAC,eAAe,mBAEjC,CAEV,CACJ,CAAC;AACJ,CAAC,CAAC;AAEF,kBAAe,YAAY,CAAC",
+      names: [],
+      sources: ["/Users/pcco056/Documents/Cours ITU/ribouchon/magicventestock/src/main/webapp/app/entities/menu.tsx"],
+      sourcesContent: ["import React from 'react';\n\nimport MenuItem from 'app/shared/layout/menus/menu-item';\n\nconst EntitiesMenu = () => {\n  return (\n    <>\n      {/* prettier-ignore */}\n      <MenuItem icon=\"asterisk\" to=\"/produit\">\n        Produit\n      </MenuItem>\n      <MenuItem icon=\"asterisk\" to=\"/produit-jour\">\n        Produit Jour\n      </MenuItem>\n      {/* jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here */}\n    </>\n  );\n};\n\nexport default EntitiesMenu;\n"],
+      version: 3
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "ac752ed17cccb51572987dac6721e43b2ed53075"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_1gblctcdm7 = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+cov_1gblctcdm7();
+cov_1gblctcdm7().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+const tslib_1 =
+/* istanbul ignore next */
+(cov_1gblctcdm7().s[1]++, require("tslib"));
+const react_1 =
+/* istanbul ignore next */
+(cov_1gblctcdm7().s[2]++, tslib_1.__importDefault(require("react")));
+const menu_item_1 =
+/* istanbul ignore next */
+(cov_1gblctcdm7().s[3]++, tslib_1.__importDefault(require("app/shared/layout/menus/menu-item")));
+/* istanbul ignore next */
+cov_1gblctcdm7().s[4]++;
+const EntitiesMenu = () => {
+  /* istanbul ignore next */
+  cov_1gblctcdm7().f[0]++;
+  cov_1gblctcdm7().s[5]++;
+  return react_1.default.createElement(react_1.default.Fragment, null, react_1.default.createElement(menu_item_1.default, {
+    icon: "asterisk",
+    to: "/produit"
+  }, "Produit"), react_1.default.createElement(menu_item_1.default, {
+    icon: "asterisk",
+    to: "/produit-jour"
+  }, "Produit Jour"));
+};
+/* istanbul ignore next */
+cov_1gblctcdm7().s[6]++;
+exports.default = EntitiesMenu;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJyZWFjdF8xIiwiY292XzFnYmxjdGNkbTciLCJzIiwidHNsaWJfMSIsIl9faW1wb3J0RGVmYXVsdCIsInJlcXVpcmUiLCJtZW51X2l0ZW1fMSIsIkVudGl0aWVzTWVudSIsImYiLCJkZWZhdWx0IiwiY3JlYXRlRWxlbWVudCIsIkZyYWdtZW50IiwiaWNvbiIsInRvIiwiZXhwb3J0cyJdLCJzb3VyY2VzIjpbIi9Vc2Vycy9wY2NvMDU2L0RvY3VtZW50cy9Db3VycyBJVFUvcmlib3VjaG9uL21hZ2ljdmVudGVzdG9jay9zcmMvbWFpbi93ZWJhcHAvYXBwL2VudGl0aWVzL21lbnUudHN4Il0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBSZWFjdCBmcm9tICdyZWFjdCc7XG5cbmltcG9ydCBNZW51SXRlbSBmcm9tICdhcHAvc2hhcmVkL2xheW91dC9tZW51cy9tZW51LWl0ZW0nO1xuXG5jb25zdCBFbnRpdGllc01lbnUgPSAoKSA9PiB7XG4gIHJldHVybiAoXG4gICAgPD5cbiAgICAgIHsvKiBwcmV0dGllci1pZ25vcmUgKi99XG4gICAgICA8TWVudUl0ZW0gaWNvbj1cImFzdGVyaXNrXCIgdG89XCIvcHJvZHVpdFwiPlxuICAgICAgICBQcm9kdWl0XG4gICAgICA8L01lbnVJdGVtPlxuICAgICAgPE1lbnVJdGVtIGljb249XCJhc3Rlcmlza1wiIHRvPVwiL3Byb2R1aXQtam91clwiPlxuICAgICAgICBQcm9kdWl0IEpvdXJcbiAgICAgIDwvTWVudUl0ZW0+XG4gICAgICB7LyogamhpcHN0ZXItbmVlZGxlLWFkZC1lbnRpdHktdG8tbWVudSAtIEpIaXBzdGVyIHdpbGwgYWRkIGVudGl0aWVzIHRvIHRoZSBtZW51IGhlcmUgKi99XG4gICAgPC8+XG4gICk7XG59O1xuXG5leHBvcnQgZGVmYXVsdCBFbnRpdGllc01lbnU7XG4iXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSxNQUFBQSxPQUFBO0FBQUE7QUFBQSxDQUFBQyxjQUFBLEdBQUFDLENBQUEsT0FBQUMsT0FBQSxDQUFBQyxlQUFBLENBQUFDLE9BQUE7QUFFQSxNQUFBQyxXQUFBO0FBQUE7QUFBQSxDQUFBTCxjQUFBLEdBQUFDLENBQUEsT0FBQUMsT0FBQSxDQUFBQyxlQUFBLENBQUFDLE9BQUE7QUFBeUQ7QUFBQUosY0FBQSxHQUFBQyxDQUFBO0FBRXpELE1BQU1LLFlBQVksR0FBR0EsQ0FBQSxLQUFLO0VBQUE7RUFBQU4sY0FBQSxHQUFBTyxDQUFBO0VBQUFQLGNBQUEsR0FBQUMsQ0FBQTtFQUN4QixPQUNFRixPQUFBLENBQUFTLE9BQUEsQ0FBQUMsYUFBQSxDQUFBVixPQUFBLENBQUFTLE9BQUEsQ0FBQUUsUUFBQSxRQUVFWCxPQUFBLENBQUFTLE9BQUEsQ0FBQUMsYUFBQSxDQUFDSixXQUFBLENBQUFHLE9BQVE7SUFBQ0csSUFBSSxFQUFDLFVBQVU7SUFBQ0MsRUFBRSxFQUFDO0VBQVUsYUFFNUIsRUFDWGIsT0FBQSxDQUFBUyxPQUFBLENBQUFDLGFBQUEsQ0FBQ0osV0FBQSxDQUFBRyxPQUFRO0lBQUNHLElBQUksRUFBQyxVQUFVO0lBQUNDLEVBQUUsRUFBQztFQUFlLGtCQUVqQyxDQUVWO0FBRVAsQ0FBQztBQUFDO0FBQUFaLGNBQUEsR0FBQUMsQ0FBQTtBQUVGWSxPQUFBLENBQUFMLE9BQUEsR0FBZUYsWUFBWSIsImlnbm9yZUxpc3QiOltdfQ==

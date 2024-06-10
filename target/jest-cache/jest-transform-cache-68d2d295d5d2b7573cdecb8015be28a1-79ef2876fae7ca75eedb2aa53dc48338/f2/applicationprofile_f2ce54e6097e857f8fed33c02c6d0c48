@@ -1,0 +1,409 @@
+0fee5077ba5a011126a67be0ed06a05e
+"use strict";
+
+/* istanbul ignore next */
+function cov_smkikrfol() {
+  var path = "/Users/pcco056/Documents/Cours ITU/ribouchon/magicventestock/src/main/webapp/app/shared/reducers/application-profile.ts";
+  var hash = "1a0b37a44cb2bcbd859c6166548840a018f25f2e";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/Users/pcco056/Documents/Cours ITU/ribouchon/magicventestock/src/main/webapp/app/shared/reducers/application-profile.ts",
+    statementMap: {
+      "0": {
+        start: {
+          line: 2,
+          column: 0
+        },
+        end: {
+          line: 2,
+          column: 62
+        }
+      },
+      "1": {
+        start: {
+          line: 3,
+          column: 0
+        },
+        end: {
+          line: 3,
+          column: 62
+        }
+      },
+      "2": {
+        start: {
+          line: 4,
+          column: 16
+        },
+        end: {
+          line: 4,
+          column: 32
+        }
+      },
+      "3": {
+        start: {
+          line: 5,
+          column: 16
+        },
+        end: {
+          line: 5,
+          column: 57
+        }
+      },
+      "4": {
+        start: {
+          line: 6,
+          column: 18
+        },
+        end: {
+          line: 6,
+          column: 45
+        }
+      },
+      "5": {
+        start: {
+          line: 7,
+          column: 24
+        },
+        end: {
+          line: 7,
+          column: 50
+        }
+      },
+      "6": {
+        start: {
+          line: 8,
+          column: 21
+        },
+        end: {
+          line: 12,
+          column: 1
+        }
+      },
+      "7": {
+        start: {
+          line: 13,
+          column: 0
+        },
+        end: {
+          line: 15,
+          column: 3
+        }
+      },
+      "8": {
+        start: {
+          line: 13,
+          column: 93
+        },
+        end: {
+          line: 13,
+          column: 199
+        }
+      },
+      "9": {
+        start: {
+          line: 13,
+          column: 150
+        },
+        end: {
+          line: 13,
+          column: 196
+        }
+      },
+      "10": {
+        start: {
+          line: 16,
+          column: 0
+        },
+        end: {
+          line: 28,
+          column: 3
+        }
+      },
+      "11": {
+        start: {
+          line: 21,
+          column: 8
+        },
+        end: {
+          line: 26,
+          column: 11
+        }
+      },
+      "12": {
+        start: {
+          line: 22,
+          column: 29
+        },
+        end: {
+          line: 22,
+          column: 43
+        }
+      },
+      "13": {
+        start: {
+          line: 23,
+          column: 12
+        },
+        end: {
+          line: 23,
+          column: 65
+        }
+      },
+      "14": {
+        start: {
+          line: 24,
+          column: 12
+        },
+        end: {
+          line: 24,
+          column: 70
+        }
+      },
+      "15": {
+        start: {
+          line: 25,
+          column: 12
+        },
+        end: {
+          line: 25,
+          column: 78
+        }
+      },
+      "16": {
+        start: {
+          line: 30,
+          column: 0
+        },
+        end: {
+          line: 30,
+          column: 58
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "(anonymous_0)",
+        decl: {
+          start: {
+            line: 13,
+            column: 87
+          },
+          end: {
+            line: 13,
+            column: 88
+          }
+        },
+        loc: {
+          start: {
+            line: 13,
+            column: 93
+          },
+          end: {
+            line: 13,
+            column: 199
+          }
+        },
+        line: 13
+      },
+      "1": {
+        name: "(anonymous_1)",
+        decl: {
+          start: {
+            line: 13,
+            column: 135
+          },
+          end: {
+            line: 13,
+            column: 136
+          }
+        },
+        loc: {
+          start: {
+            line: 13,
+            column: 148
+          },
+          end: {
+            line: 13,
+            column: 198
+          }
+        },
+        line: 13
+      },
+      "2": {
+        name: "(anonymous_2)",
+        decl: {
+          start: {
+            line: 20,
+            column: 4
+          },
+          end: {
+            line: 20,
+            column: 5
+          }
+        },
+        loc: {
+          start: {
+            line: 20,
+            column: 27
+          },
+          end: {
+            line: 27,
+            column: 5
+          }
+        },
+        line: 20
+      },
+      "3": {
+        name: "(anonymous_3)",
+        decl: {
+          start: {
+            line: 21,
+            column: 54
+          },
+          end: {
+            line: 21,
+            column: 55
+          }
+        },
+        loc: {
+          start: {
+            line: 21,
+            column: 73
+          },
+          end: {
+            line: 26,
+            column: 9
+          }
+        },
+        line: 21
+      }
+    },
+    branchMap: {},
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0,
+      "9": 0,
+      "10": 0,
+      "11": 0,
+      "12": 0,
+      "13": 0,
+      "14": 0,
+      "15": 0,
+      "16": 0
+    },
+    f: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0
+    },
+    b: {},
+    inputSourceMap: {
+      file: "/Users/pcco056/Documents/Cours ITU/ribouchon/magicventestock/src/main/webapp/app/shared/reducers/application-profile.ts",
+      mappings: ";;;;AAAA,0DAA0B;AAE1B,8CAAiE;AACjE,mDAAsD;AAEtD,MAAM,YAAY,GAAG;IACnB,SAAS,EAAE,EAAE;IACb,YAAY,EAAE,IAAI;IAClB,gBAAgB,EAAE,KAAK;CACxB,CAAC;AAIW,QAAA,UAAU,GAAG,IAAA,0BAAgB,EAAC,gCAAgC,EAAE,GAAS,EAAE,0DAAC,OAAA,eAAK,CAAC,GAAG,CAAM,iBAAiB,CAAC,CAAA,GAAA,EAAE;IAC1H,cAAc,EAAE,mCAAmB;CACpC,CAAC,CAAC;AAEU,QAAA,uBAAuB,GAAG,IAAA,qBAAW,EAAC;IACjD,IAAI,EAAE,oBAAoB;IAC1B,YAAY,EAAE,YAAuC;IACrD,QAAQ,EAAE,EAAE;IACZ,aAAa,CAAC,OAAO;QACnB,OAAO,CAAC,OAAO,CAAC,kBAAU,CAAC,SAAS,EAAE,CAAC,KAAK,EAAE,MAAM,EAAE,EAAE;YACtD,MAAM,EAAE,IAAI,EAAE,GAAG,MAAM,CAAC,OAAO,CAAC;YAChC,KAAK,CAAC,SAAS,GAAG,IAAI,CAAC,4BAA4B,CAAC,CAAC;YACrD,KAAK,CAAC,YAAY,GAAG,IAAI,CAAC,cAAc,CAAC,QAAQ,CAAC,MAAM,CAAC,CAAC;YAC1D,KAAK,CAAC,gBAAgB,GAAG,IAAI,CAAC,cAAc,CAAC,QAAQ,CAAC,UAAU,CAAC,CAAC;QACpE,CAAC,CAAC,CAAC;IACL,CAAC;CACF,CAAC,CAAC;AAEH,UAAU;AACV,kBAAe,+BAAuB,CAAC,OAAO,CAAC",
+      names: [],
+      sources: ["/Users/pcco056/Documents/Cours ITU/ribouchon/magicventestock/src/main/webapp/app/shared/reducers/application-profile.ts"],
+      sourcesContent: ["import axios from 'axios';\n\nimport { createAsyncThunk, createSlice } from '@reduxjs/toolkit';\nimport { serializeAxiosError } from './reducer.utils';\n\nconst initialState = {\n  ribbonEnv: '',\n  inProduction: true,\n  isOpenAPIEnabled: false,\n};\n\nexport type ApplicationProfileState = Readonly<typeof initialState>;\n\nexport const getProfile = createAsyncThunk('applicationProfile/get_profile', async () => axios.get<any>('management/info'), {\n  serializeError: serializeAxiosError,\n});\n\nexport const ApplicationProfileSlice = createSlice({\n  name: 'applicationProfile',\n  initialState: initialState as ApplicationProfileState,\n  reducers: {},\n  extraReducers(builder) {\n    builder.addCase(getProfile.fulfilled, (state, action) => {\n      const { data } = action.payload;\n      state.ribbonEnv = data['display-ribbon-on-profiles'];\n      state.inProduction = data.activeProfiles.includes('prod');\n      state.isOpenAPIEnabled = data.activeProfiles.includes('api-docs');\n    });\n  },\n});\n\n// Reducer\nexport default ApplicationProfileSlice.reducer;\n"],
+      version: 3
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "1a0b37a44cb2bcbd859c6166548840a018f25f2e"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_smkikrfol = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+cov_smkikrfol();
+cov_smkikrfol().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+/* istanbul ignore next */
+cov_smkikrfol().s[1]++;
+exports.ApplicationProfileSlice = exports.getProfile = void 0;
+const tslib_1 =
+/* istanbul ignore next */
+(cov_smkikrfol().s[2]++, require("tslib"));
+const axios_1 =
+/* istanbul ignore next */
+(cov_smkikrfol().s[3]++, tslib_1.__importDefault(require("axios")));
+const toolkit_1 =
+/* istanbul ignore next */
+(cov_smkikrfol().s[4]++, require("@reduxjs/toolkit"));
+const reducer_utils_1 =
+/* istanbul ignore next */
+(cov_smkikrfol().s[5]++, require("./reducer.utils"));
+const initialState =
+/* istanbul ignore next */
+(cov_smkikrfol().s[6]++, {
+  ribbonEnv: '',
+  inProduction: true,
+  isOpenAPIEnabled: false
+});
+/* istanbul ignore next */
+cov_smkikrfol().s[7]++;
+exports.getProfile = (0, toolkit_1.createAsyncThunk)('applicationProfile/get_profile', () => {
+  /* istanbul ignore next */
+  cov_smkikrfol().f[0]++;
+  cov_smkikrfol().s[8]++;
+  return tslib_1.__awaiter(void 0, void 0, void 0, function* () {
+    /* istanbul ignore next */
+    cov_smkikrfol().f[1]++;
+    cov_smkikrfol().s[9]++;
+    return axios_1.default.get('management/info');
+  });
+}, {
+  serializeError: reducer_utils_1.serializeAxiosError
+});
+/* istanbul ignore next */
+cov_smkikrfol().s[10]++;
+exports.ApplicationProfileSlice = (0, toolkit_1.createSlice)({
+  name: 'applicationProfile',
+  initialState: initialState,
+  reducers: {},
+  extraReducers(builder) {
+    /* istanbul ignore next */
+    cov_smkikrfol().f[2]++;
+    cov_smkikrfol().s[11]++;
+    builder.addCase(exports.getProfile.fulfilled, (state, action) => {
+      /* istanbul ignore next */
+      cov_smkikrfol().f[3]++;
+      const {
+        data
+      } =
+      /* istanbul ignore next */
+      (cov_smkikrfol().s[12]++, action.payload);
+      /* istanbul ignore next */
+      cov_smkikrfol().s[13]++;
+      state.ribbonEnv = data['display-ribbon-on-profiles'];
+      /* istanbul ignore next */
+      cov_smkikrfol().s[14]++;
+      state.inProduction = data.activeProfiles.includes('prod');
+      /* istanbul ignore next */
+      cov_smkikrfol().s[15]++;
+      state.isOpenAPIEnabled = data.activeProfiles.includes('api-docs');
+    });
+  }
+});
+// Reducer
+/* istanbul ignore next */
+cov_smkikrfol().s[16]++;
+exports.default = exports.ApplicationProfileSlice.reducer;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJjb3Zfc21raWtyZm9sIiwiYWN0dWFsQ292ZXJhZ2UiLCJzIiwiYXhpb3NfMSIsInRzbGliXzEiLCJfX2ltcG9ydERlZmF1bHQiLCJyZXF1aXJlIiwidG9vbGtpdF8xIiwicmVkdWNlcl91dGlsc18xIiwiaW5pdGlhbFN0YXRlIiwicmliYm9uRW52IiwiaW5Qcm9kdWN0aW9uIiwiaXNPcGVuQVBJRW5hYmxlZCIsImV4cG9ydHMiLCJnZXRQcm9maWxlIiwiY3JlYXRlQXN5bmNUaHVuayIsImYiLCJfX2F3YWl0ZXIiLCJkZWZhdWx0IiwiZ2V0Iiwic2VyaWFsaXplRXJyb3IiLCJzZXJpYWxpemVBeGlvc0Vycm9yIiwiQXBwbGljYXRpb25Qcm9maWxlU2xpY2UiLCJjcmVhdGVTbGljZSIsIm5hbWUiLCJyZWR1Y2VycyIsImV4dHJhUmVkdWNlcnMiLCJidWlsZGVyIiwiYWRkQ2FzZSIsImZ1bGZpbGxlZCIsInN0YXRlIiwiYWN0aW9uIiwiZGF0YSIsInBheWxvYWQiLCJhY3RpdmVQcm9maWxlcyIsImluY2x1ZGVzIiwicmVkdWNlciJdLCJzb3VyY2VzIjpbIi9Vc2Vycy9wY2NvMDU2L0RvY3VtZW50cy9Db3VycyBJVFUvcmlib3VjaG9uL21hZ2ljdmVudGVzdG9jay9zcmMvbWFpbi93ZWJhcHAvYXBwL3NoYXJlZC9yZWR1Y2Vycy9hcHBsaWNhdGlvbi1wcm9maWxlLnRzIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBheGlvcyBmcm9tICdheGlvcyc7XG5cbmltcG9ydCB7IGNyZWF0ZUFzeW5jVGh1bmssIGNyZWF0ZVNsaWNlIH0gZnJvbSAnQHJlZHV4anMvdG9vbGtpdCc7XG5pbXBvcnQgeyBzZXJpYWxpemVBeGlvc0Vycm9yIH0gZnJvbSAnLi9yZWR1Y2VyLnV0aWxzJztcblxuY29uc3QgaW5pdGlhbFN0YXRlID0ge1xuICByaWJib25FbnY6ICcnLFxuICBpblByb2R1Y3Rpb246IHRydWUsXG4gIGlzT3BlbkFQSUVuYWJsZWQ6IGZhbHNlLFxufTtcblxuZXhwb3J0IHR5cGUgQXBwbGljYXRpb25Qcm9maWxlU3RhdGUgPSBSZWFkb25seTx0eXBlb2YgaW5pdGlhbFN0YXRlPjtcblxuZXhwb3J0IGNvbnN0IGdldFByb2ZpbGUgPSBjcmVhdGVBc3luY1RodW5rKCdhcHBsaWNhdGlvblByb2ZpbGUvZ2V0X3Byb2ZpbGUnLCBhc3luYyAoKSA9PiBheGlvcy5nZXQ8YW55PignbWFuYWdlbWVudC9pbmZvJyksIHtcbiAgc2VyaWFsaXplRXJyb3I6IHNlcmlhbGl6ZUF4aW9zRXJyb3IsXG59KTtcblxuZXhwb3J0IGNvbnN0IEFwcGxpY2F0aW9uUHJvZmlsZVNsaWNlID0gY3JlYXRlU2xpY2Uoe1xuICBuYW1lOiAnYXBwbGljYXRpb25Qcm9maWxlJyxcbiAgaW5pdGlhbFN0YXRlOiBpbml0aWFsU3RhdGUgYXMgQXBwbGljYXRpb25Qcm9maWxlU3RhdGUsXG4gIHJlZHVjZXJzOiB7fSxcbiAgZXh0cmFSZWR1Y2VycyhidWlsZGVyKSB7XG4gICAgYnVpbGRlci5hZGRDYXNlKGdldFByb2ZpbGUuZnVsZmlsbGVkLCAoc3RhdGUsIGFjdGlvbikgPT4ge1xuICAgICAgY29uc3QgeyBkYXRhIH0gPSBhY3Rpb24ucGF5bG9hZDtcbiAgICAgIHN0YXRlLnJpYmJvbkVudiA9IGRhdGFbJ2Rpc3BsYXktcmliYm9uLW9uLXByb2ZpbGVzJ107XG4gICAgICBzdGF0ZS5pblByb2R1Y3Rpb24gPSBkYXRhLmFjdGl2ZVByb2ZpbGVzLmluY2x1ZGVzKCdwcm9kJyk7XG4gICAgICBzdGF0ZS5pc09wZW5BUElFbmFibGVkID0gZGF0YS5hY3RpdmVQcm9maWxlcy5pbmNsdWRlcygnYXBpLWRvY3MnKTtcbiAgICB9KTtcbiAgfSxcbn0pO1xuXG4vLyBSZWR1Y2VyXG5leHBvcnQgZGVmYXVsdCBBcHBsaWNhdGlvblByb2ZpbGVTbGljZS5yZWR1Y2VyO1xuIl0sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7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

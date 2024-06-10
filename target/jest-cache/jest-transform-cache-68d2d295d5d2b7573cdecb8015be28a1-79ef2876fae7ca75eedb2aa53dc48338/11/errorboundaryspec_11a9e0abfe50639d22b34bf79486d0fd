@@ -1,0 +1,27 @@
+a7e3f9d1683a247ca2045a97f3fa0d58
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const tslib_1 = require("tslib");
+const react_1 = tslib_1.__importDefault(require("react"));
+const react_2 = require("@testing-library/react");
+const error_boundary_1 = tslib_1.__importDefault(require("app/shared/error/error-boundary"));
+const ErrorComp = () => {
+    throw new Error('test');
+};
+describe('error component', () => {
+    beforeEach(() => {
+        // ignore console and jsdom errors
+        jest.spyOn(window._virtualConsole, 'emit').mockImplementation(() => false);
+        jest.spyOn(window.console, 'error').mockImplementation(() => false);
+    });
+    it('Should throw an error when component is not enclosed in Error Boundary', () => {
+        expect(() => (0, react_2.render)(react_1.default.createElement(ErrorComp, null))).toThrow(Error);
+    });
+    it('Should call Error Boundary componentDidCatch method', () => {
+        const spy = jest.spyOn(error_boundary_1.default.prototype, 'componentDidCatch');
+        (0, react_2.render)(react_1.default.createElement(error_boundary_1.default, null,
+            react_1.default.createElement(ErrorComp, null)));
+        expect(spy).toHaveBeenCalled();
+    });
+});
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJmaWxlIjoiL1VzZXJzL3BjY28wNTYvRG9jdW1lbnRzL0NvdXJzIElUVS9yaWJvdWNob24vbWFnaWN2ZW50ZXN0b2NrL3NyYy9tYWluL3dlYmFwcC9hcHAvc2hhcmVkL2Vycm9yL2Vycm9yLWJvdW5kYXJ5LnNwZWMudHN4IiwibWFwcGluZ3MiOiI7OztBQUFBLDBEQUEwQjtBQUMxQixrREFBZ0Q7QUFFaEQsNkZBQTREO0FBRTVELE1BQU0sU0FBUyxHQUFHLEdBQUcsRUFBRTtJQUNyQixNQUFNLElBQUksS0FBSyxDQUFDLE1BQU0sQ0FBQyxDQUFDO0FBQzFCLENBQUMsQ0FBQztBQUVGLFFBQVEsQ0FBQyxpQkFBaUIsRUFBRSxHQUFHLEVBQUU7SUFDL0IsVUFBVSxDQUFDLEdBQUcsRUFBRTtRQUNkLGtDQUFrQztRQUNsQyxJQUFJLENBQUMsS0FBSyxDQUFFLE1BQWMsQ0FBQyxlQUFlLEVBQUUsTUFBTSxDQUFDLENBQUMsa0JBQWtCLENBQUMsR0FBRyxFQUFFLENBQUMsS0FBSyxDQUFDLENBQUM7UUFDcEYsSUFBSSxDQUFDLEtBQUssQ0FBRSxNQUFjLENBQUMsT0FBTyxFQUFFLE9BQU8sQ0FBQyxDQUFDLGtCQUFrQixDQUFDLEdBQUcsRUFBRSxDQUFDLEtBQUssQ0FBQyxDQUFDO0lBQy9FLENBQUMsQ0FBQyxDQUFDO0lBRUgsRUFBRSxDQUFDLHdFQUF3RSxFQUFFLEdBQUcsRUFBRTtRQUNoRixNQUFNLENBQUMsR0FBRyxFQUFFLENBQUMsSUFBQSxjQUFNLEVBQUMsOEJBQUMsU0FBUyxPQUFHLENBQUMsQ0FBQyxDQUFDLE9BQU8sQ0FBQyxLQUFLLENBQUMsQ0FBQztJQUNyRCxDQUFDLENBQUMsQ0FBQztJQUVILEVBQUUsQ0FBQyxxREFBcUQsRUFBRSxHQUFHLEVBQUU7UUFDN0QsTUFBTSxHQUFHLEdBQUcsSUFBSSxDQUFDLEtBQUssQ0FBQyx3QkFBYSxDQUFDLFNBQVMsRUFBRSxtQkFBbUIsQ0FBQyxDQUFDO1FBQ3JFLElBQUEsY0FBTSxFQUNKLDhCQUFDLHdCQUFhO1lBQ1osOEJBQUMsU0FBUyxPQUFHLENBQ0MsQ0FDakIsQ0FBQztRQUNGLE1BQU0sQ0FBQyxHQUFHLENBQUMsQ0FBQyxnQkFBZ0IsRUFBRSxDQUFDO0lBQ2pDLENBQUMsQ0FBQyxDQUFDO0FBQ0wsQ0FBQyxDQUFDLENBQUMiLCJuYW1lcyI6W10sInNvdXJjZXMiOlsiL1VzZXJzL3BjY28wNTYvRG9jdW1lbnRzL0NvdXJzIElUVS9yaWJvdWNob24vbWFnaWN2ZW50ZXN0b2NrL3NyYy9tYWluL3dlYmFwcC9hcHAvc2hhcmVkL2Vycm9yL2Vycm9yLWJvdW5kYXJ5LnNwZWMudHN4Il0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBSZWFjdCBmcm9tICdyZWFjdCc7XG5pbXBvcnQgeyByZW5kZXIgfSBmcm9tICdAdGVzdGluZy1saWJyYXJ5L3JlYWN0JztcblxuaW1wb3J0IEVycm9yQm91bmRhcnkgZnJvbSAnYXBwL3NoYXJlZC9lcnJvci9lcnJvci1ib3VuZGFyeSc7XG5cbmNvbnN0IEVycm9yQ29tcCA9ICgpID0+IHtcbiAgdGhyb3cgbmV3IEVycm9yKCd0ZXN0Jyk7XG59O1xuXG5kZXNjcmliZSgnZXJyb3IgY29tcG9uZW50JywgKCkgPT4ge1xuICBiZWZvcmVFYWNoKCgpID0+IHtcbiAgICAvLyBpZ25vcmUgY29uc29sZSBhbmQganNkb20gZXJyb3JzXG4gICAgamVzdC5zcHlPbigod2luZG93IGFzIGFueSkuX3ZpcnR1YWxDb25zb2xlLCAnZW1pdCcpLm1vY2tJbXBsZW1lbnRhdGlvbigoKSA9PiBmYWxzZSk7XG4gICAgamVzdC5zcHlPbigod2luZG93IGFzIGFueSkuY29uc29sZSwgJ2Vycm9yJykubW9ja0ltcGxlbWVudGF0aW9uKCgpID0+IGZhbHNlKTtcbiAgfSk7XG5cbiAgaXQoJ1Nob3VsZCB0aHJvdyBhbiBlcnJvciB3aGVuIGNvbXBvbmVudCBpcyBub3QgZW5jbG9zZWQgaW4gRXJyb3IgQm91bmRhcnknLCAoKSA9PiB7XG4gICAgZXhwZWN0KCgpID0+IHJlbmRlcig8RXJyb3JDb21wIC8+KSkudG9UaHJvdyhFcnJvcik7XG4gIH0pO1xuXG4gIGl0KCdTaG91bGQgY2FsbCBFcnJvciBCb3VuZGFyeSBjb21wb25lbnREaWRDYXRjaCBtZXRob2QnLCAoKSA9PiB7XG4gICAgY29uc3Qgc3B5ID0gamVzdC5zcHlPbihFcnJvckJvdW5kYXJ5LnByb3RvdHlwZSwgJ2NvbXBvbmVudERpZENhdGNoJyk7XG4gICAgcmVuZGVyKFxuICAgICAgPEVycm9yQm91bmRhcnk+XG4gICAgICAgIDxFcnJvckNvbXAgLz5cbiAgICAgIDwvRXJyb3JCb3VuZGFyeT4sXG4gICAgKTtcbiAgICBleHBlY3Qoc3B5KS50b0hhdmVCZWVuQ2FsbGVkKCk7XG4gIH0pO1xufSk7XG4iXSwidmVyc2lvbiI6M30=

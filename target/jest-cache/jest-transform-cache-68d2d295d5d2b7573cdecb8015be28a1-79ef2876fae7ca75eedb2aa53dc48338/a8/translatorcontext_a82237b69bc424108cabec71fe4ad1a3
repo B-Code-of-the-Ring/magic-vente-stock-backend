@@ -1,0 +1,52 @@
+a70533ce66fe233bb6e36411f25da98d
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+const tslib_1 = require("tslib");
+const merge_1 = tslib_1.__importDefault(require("lodash/merge"));
+/**
+ * Holder for translation content and locale
+ */
+class TranslatorContext {
+  static change() {
+    this.context.lastChange = new Date().getTime();
+  }
+  static registerTranslations(locale, translation) {
+    if (this.context.translations[locale]) {
+      (0, merge_1.default)(this.context.translations[locale], translation);
+    } else {
+      this.context.translations[locale] = translation;
+    }
+    TranslatorContext.change();
+  }
+  static setDefaultLocale(locale) {
+    this.context.defaultLocale = locale;
+    TranslatorContext.change();
+  }
+  static setMissingTranslationMsg(msg) {
+    this.context.missingTranslationMsg = msg;
+    TranslatorContext.change();
+  }
+  static setRenderInnerTextForMissingKeys(flag) {
+    this.context.renderInnerTextForMissingKeys = flag;
+    TranslatorContext.change();
+  }
+  static setLocale(locale) {
+    this.context.previousLocale = this.context.locale;
+    this.context.locale = locale || this.context.defaultLocale;
+    TranslatorContext.change();
+  }
+}
+TranslatorContext.context = {
+  previousLocale: null,
+  defaultLocale: null,
+  locale: null,
+  lastChange: new Date().getTime(),
+  translations: {},
+  renderInnerTextForMissingKeys: true,
+  missingTranslationMsg: 'translation-not-found'
+};
+exports.default = TranslatorContext;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJtZXJnZV8xIiwidHNsaWJfMSIsIl9faW1wb3J0RGVmYXVsdCIsInJlcXVpcmUiLCJUcmFuc2xhdG9yQ29udGV4dCIsImNoYW5nZSIsImNvbnRleHQiLCJsYXN0Q2hhbmdlIiwiRGF0ZSIsImdldFRpbWUiLCJyZWdpc3RlclRyYW5zbGF0aW9ucyIsImxvY2FsZSIsInRyYW5zbGF0aW9uIiwidHJhbnNsYXRpb25zIiwiZGVmYXVsdCIsInNldERlZmF1bHRMb2NhbGUiLCJkZWZhdWx0TG9jYWxlIiwic2V0TWlzc2luZ1RyYW5zbGF0aW9uTXNnIiwibXNnIiwibWlzc2luZ1RyYW5zbGF0aW9uTXNnIiwic2V0UmVuZGVySW5uZXJUZXh0Rm9yTWlzc2luZ0tleXMiLCJmbGFnIiwicmVuZGVySW5uZXJUZXh0Rm9yTWlzc2luZ0tleXMiLCJzZXRMb2NhbGUiLCJwcmV2aW91c0xvY2FsZSIsImV4cG9ydHMiXSwic291cmNlcyI6WyIuLi8uLi9zcmMvbGFuZ3VhZ2UvdHJhbnNsYXRvci1jb250ZXh0LnRzIl0sInNvdXJjZXNDb250ZW50IjpbbnVsbF0sIm1hcHBpbmdzIjoiOzs7Ozs7QUFBQSxNQUFBQSxPQUFBLEdBQUFDLE9BQUEsQ0FBQUMsZUFBQSxDQUFBQyxPQUFBO0FBRUE7OztBQUlBLE1BQU1DLGlCQUFpQjtFQVdyQixPQUFPQyxNQUFNQSxDQUFBO0lBQ1gsSUFBSSxDQUFDQyxPQUFPLENBQUNDLFVBQVUsR0FBRyxJQUFJQyxJQUFJLEVBQUUsQ0FBQ0MsT0FBTyxFQUFFO0VBQ2hEO0VBRUEsT0FBT0Msb0JBQW9CQSxDQUFDQyxNQUFjLEVBQUVDLFdBQWdCO0lBQzFELElBQUksSUFBSSxDQUFDTixPQUFPLENBQUNPLFlBQVksQ0FBQ0YsTUFBTSxDQUFDLEVBQUU7TUFDckMsSUFBQVgsT0FBQSxDQUFBYyxPQUFLLEVBQUMsSUFBSSxDQUFDUixPQUFPLENBQUNPLFlBQVksQ0FBQ0YsTUFBTSxDQUFDLEVBQUVDLFdBQVcsQ0FBQztLQUN0RCxNQUFNO01BQ0wsSUFBSSxDQUFDTixPQUFPLENBQUNPLFlBQVksQ0FBQ0YsTUFBTSxDQUFDLEdBQUdDLFdBQVc7O0lBRWpEUixpQkFBaUIsQ0FBQ0MsTUFBTSxFQUFFO0VBQzVCO0VBRUEsT0FBT1UsZ0JBQWdCQSxDQUFDSixNQUFjO0lBQ3BDLElBQUksQ0FBQ0wsT0FBTyxDQUFDVSxhQUFhLEdBQUdMLE1BQU07SUFDbkNQLGlCQUFpQixDQUFDQyxNQUFNLEVBQUU7RUFDNUI7RUFFQSxPQUFPWSx3QkFBd0JBLENBQUNDLEdBQVc7SUFDekMsSUFBSSxDQUFDWixPQUFPLENBQUNhLHFCQUFxQixHQUFHRCxHQUFHO0lBQ3hDZCxpQkFBaUIsQ0FBQ0MsTUFBTSxFQUFFO0VBQzVCO0VBRUEsT0FBT2UsZ0NBQWdDQSxDQUFDQyxJQUFhO0lBQ25ELElBQUksQ0FBQ2YsT0FBTyxDQUFDZ0IsNkJBQTZCLEdBQUdELElBQUk7SUFDakRqQixpQkFBaUIsQ0FBQ0MsTUFBTSxFQUFFO0VBQzVCO0VBRUEsT0FBT2tCLFNBQVNBLENBQUNaLE1BQWM7SUFDN0IsSUFBSSxDQUFDTCxPQUFPLENBQUNrQixjQUFjLEdBQUcsSUFBSSxDQUFDbEIsT0FBTyxDQUFDSyxNQUFNO0lBQ2pELElBQUksQ0FBQ0wsT0FBTyxDQUFDSyxNQUFNLEdBQUdBLE1BQU0sSUFBSSxJQUFJLENBQUNMLE9BQU8sQ0FBQ1UsYUFBYTtJQUMxRFosaUJBQWlCLENBQUNDLE1BQU0sRUFBRTtFQUM1Qjs7QUExQ09ELGlCQUFBLENBQUFFLE9BQU8sR0FBRztFQUNma0IsY0FBYyxFQUFFLElBQUk7RUFDcEJSLGFBQWEsRUFBRSxJQUFJO0VBQ25CTCxNQUFNLEVBQUUsSUFBSTtFQUNaSixVQUFVLEVBQUUsSUFBSUMsSUFBSSxFQUFFLENBQUNDLE9BQU8sRUFBRTtFQUNoQ0ksWUFBWSxFQUFFLEVBQUU7RUFDaEJTLDZCQUE2QixFQUFFLElBQUk7RUFDbkNILHFCQUFxQixFQUFFO0NBQ3hCO0FBcUNITSxPQUFBLENBQUFYLE9BQUEsR0FBZVYsaUJBQWlCIiwiaWdub3JlTGlzdCI6W119

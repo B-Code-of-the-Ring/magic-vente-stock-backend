@@ -1,0 +1,102 @@
+801e6f83a45f6d12dc6fe8946f65a144
+"use strict";
+
+/* istanbul ignore next */
+function cov_11veldo22w() {
+  var path = "/Users/pcco056/Documents/Cours ITU/ribouchon/magicventestock/src/main/webapp/app/shared/model/user.model.ts";
+  var hash = "890a2cf208d6c87af8a8850c0bc58cc4707e5b1a";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/Users/pcco056/Documents/Cours ITU/ribouchon/magicventestock/src/main/webapp/app/shared/model/user.model.ts",
+    statementMap: {
+      "0": {
+        start: {
+          line: 2,
+          column: 0
+        },
+        end: {
+          line: 2,
+          column: 62
+        }
+      },
+      "1": {
+        start: {
+          line: 3,
+          column: 0
+        },
+        end: {
+          line: 3,
+          column: 30
+        }
+      },
+      "2": {
+        start: {
+          line: 4,
+          column: 0
+        },
+        end: {
+          line: 18,
+          column: 2
+        }
+      }
+    },
+    fnMap: {},
+    branchMap: {},
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0
+    },
+    f: {},
+    b: {},
+    inputSourceMap: {
+      file: "/Users/pcco056/Documents/Cours ITU/ribouchon/magicventestock/src/main/webapp/app/shared/model/user.model.ts",
+      mappings: ";;;AAgBa,QAAA,YAAY,GAAoB;IAC3C,EAAE,EAAE,EAAE;IACN,KAAK,EAAE,EAAE;IACT,SAAS,EAAE,EAAE;IACb,QAAQ,EAAE,EAAE;IACZ,KAAK,EAAE,EAAE;IACT,SAAS,EAAE,IAAI;IACf,OAAO,EAAE,EAAE;IACX,WAAW,EAAE,EAAE;IACf,SAAS,EAAE,EAAE;IACb,WAAW,EAAE,IAAI;IACjB,cAAc,EAAE,EAAE;IAClB,gBAAgB,EAAE,IAAI;IACtB,QAAQ,EAAE,EAAE;CACb,CAAC",
+      names: [],
+      sources: ["/Users/pcco056/Documents/Cours ITU/ribouchon/magicventestock/src/main/webapp/app/shared/model/user.model.ts"],
+      sourcesContent: ["export interface IUser {\n  id?: any;\n  login?: string;\n  firstName?: string;\n  lastName?: string;\n  email?: string;\n  activated?: boolean;\n  langKey?: string;\n  authorities?: any[];\n  createdBy?: string;\n  createdDate?: Date | null;\n  lastModifiedBy?: string;\n  lastModifiedDate?: Date | null;\n  password?: string;\n}\n\nexport const defaultValue: Readonly<IUser> = {\n  id: '',\n  login: '',\n  firstName: '',\n  lastName: '',\n  email: '',\n  activated: true,\n  langKey: '',\n  authorities: [],\n  createdBy: '',\n  createdDate: null,\n  lastModifiedBy: '',\n  lastModifiedDate: null,\n  password: '',\n};\n"],
+      version: 3
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "890a2cf208d6c87af8a8850c0bc58cc4707e5b1a"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_11veldo22w = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+cov_11veldo22w();
+cov_11veldo22w().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+/* istanbul ignore next */
+cov_11veldo22w().s[1]++;
+exports.defaultValue = void 0;
+/* istanbul ignore next */
+cov_11veldo22w().s[2]++;
+exports.defaultValue = {
+  id: '',
+  login: '',
+  firstName: '',
+  lastName: '',
+  email: '',
+  activated: true,
+  langKey: '',
+  authorities: [],
+  createdBy: '',
+  createdDate: null,
+  lastModifiedBy: '',
+  lastModifiedDate: null,
+  password: ''
+};
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJjb3ZfMTF2ZWxkbzIydyIsImFjdHVhbENvdmVyYWdlIiwicyIsImV4cG9ydHMiLCJkZWZhdWx0VmFsdWUiLCJpZCIsImxvZ2luIiwiZmlyc3ROYW1lIiwibGFzdE5hbWUiLCJlbWFpbCIsImFjdGl2YXRlZCIsImxhbmdLZXkiLCJhdXRob3JpdGllcyIsImNyZWF0ZWRCeSIsImNyZWF0ZWREYXRlIiwibGFzdE1vZGlmaWVkQnkiLCJsYXN0TW9kaWZpZWREYXRlIiwicGFzc3dvcmQiXSwic291cmNlcyI6WyIvVXNlcnMvcGNjbzA1Ni9Eb2N1bWVudHMvQ291cnMgSVRVL3JpYm91Y2hvbi9tYWdpY3ZlbnRlc3RvY2svc3JjL21haW4vd2ViYXBwL2FwcC9zaGFyZWQvbW9kZWwvdXNlci5tb2RlbC50cyJdLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgaW50ZXJmYWNlIElVc2VyIHtcbiAgaWQ/OiBhbnk7XG4gIGxvZ2luPzogc3RyaW5nO1xuICBmaXJzdE5hbWU/OiBzdHJpbmc7XG4gIGxhc3ROYW1lPzogc3RyaW5nO1xuICBlbWFpbD86IHN0cmluZztcbiAgYWN0aXZhdGVkPzogYm9vbGVhbjtcbiAgbGFuZ0tleT86IHN0cmluZztcbiAgYXV0aG9yaXRpZXM/OiBhbnlbXTtcbiAgY3JlYXRlZEJ5Pzogc3RyaW5nO1xuICBjcmVhdGVkRGF0ZT86IERhdGUgfCBudWxsO1xuICBsYXN0TW9kaWZpZWRCeT86IHN0cmluZztcbiAgbGFzdE1vZGlmaWVkRGF0ZT86IERhdGUgfCBudWxsO1xuICBwYXNzd29yZD86IHN0cmluZztcbn1cblxuZXhwb3J0IGNvbnN0IGRlZmF1bHRWYWx1ZTogUmVhZG9ubHk8SVVzZXI+ID0ge1xuICBpZDogJycsXG4gIGxvZ2luOiAnJyxcbiAgZmlyc3ROYW1lOiAnJyxcbiAgbGFzdE5hbWU6ICcnLFxuICBlbWFpbDogJycsXG4gIGFjdGl2YXRlZDogdHJ1ZSxcbiAgbGFuZ0tleTogJycsXG4gIGF1dGhvcml0aWVzOiBbXSxcbiAgY3JlYXRlZEJ5OiAnJyxcbiAgY3JlYXRlZERhdGU6IG51bGwsXG4gIGxhc3RNb2RpZmllZEJ5OiAnJyxcbiAgbGFzdE1vZGlmaWVkRGF0ZTogbnVsbCxcbiAgcGFzc3dvcmQ6ICcnLFxufTtcbiJdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7SUE0QkU7SUFBQUEsY0FBQSxZQUFBQSxDQUFBO01BQUEsT0FBQUMsY0FBQTtJQUFBO0VBQUE7RUFBQSxPQUFBQSxjQUFBO0FBQUE7QUFBQUQsY0FBQTtBQUFBQSxjQUFBLEdBQUFFLENBQUE7Ozs7Ozs7OztBQVpXQyxPQUFBLENBQUFDLFlBQVksR0FBb0I7RUFDM0NDLEVBQUUsRUFBRSxFQUFFO0VBQ05DLEtBQUssRUFBRSxFQUFFO0VBQ1RDLFNBQVMsRUFBRSxFQUFFO0VBQ2JDLFFBQVEsRUFBRSxFQUFFO0VBQ1pDLEtBQUssRUFBRSxFQUFFO0VBQ1RDLFNBQVMsRUFBRSxJQUFJO0VBQ2ZDLE9BQU8sRUFBRSxFQUFFO0VBQ1hDLFdBQVcsRUFBRSxFQUFFO0VBQ2ZDLFNBQVMsRUFBRSxFQUFFO0VBQ2JDLFdBQVcsRUFBRSxJQUFJO0VBQ2pCQyxjQUFjLEVBQUUsRUFBRTtFQUNsQkMsZ0JBQWdCLEVBQUUsSUFBSTtFQUN0QkMsUUFBUSxFQUFFO0NBQ1giLCJpZ25vcmVMaXN0IjpbXX0=

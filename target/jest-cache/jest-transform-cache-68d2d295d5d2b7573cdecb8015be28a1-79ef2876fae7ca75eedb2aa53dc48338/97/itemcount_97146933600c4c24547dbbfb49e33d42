@@ -1,0 +1,63 @@
+ad9dee3515607b110aa7fc71bf57fe6a
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.JhiItemCount = void 0;
+const tslib_1 = require("tslib");
+/*
+ Copyright 2017-2023 the original author or authors from the JHipster project.
+
+ This file is part of the JHipster project, see https://www.jhipster.tech/
+ for more information.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ */
+const react_1 = tslib_1.__importDefault(require("react"));
+const language_1 = require("../../language");
+class JhiItemCount extends react_1.default.Component {
+  constructor(props) {
+    super(props);
+  }
+  i18nValues() {
+    const {
+      page,
+      total,
+      itemsPerPage
+    } = this.props;
+    const first = (page - 1) * itemsPerPage === 0 ? 1 : (page - 1) * itemsPerPage + 1;
+    const second = page * itemsPerPage < total ? page * itemsPerPage : total;
+    return {
+      first,
+      second,
+      total
+    };
+  }
+  render() {
+    const {
+      page,
+      total,
+      itemsPerPage,
+      i18nEnabled
+    } = this.props;
+    return react_1.default.createElement("div", {
+      className: "info jhi-item-count"
+    }, i18nEnabled ? react_1.default.createElement(language_1.Translate, {
+      contentKey: "global.item-count",
+      interpolate: this.i18nValues()
+    }, "Count") : react_1.default.createElement("span", null, "Showing ", (page - 1) * itemsPerPage === 0 ? 1 : (page - 1) * itemsPerPage + 1, " -", ' ', page * itemsPerPage < total ? page * itemsPerPage : total, " of ", total, " items."));
+  }
+}
+exports.JhiItemCount = JhiItemCount;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJyZWFjdF8xIiwidHNsaWJfMSIsIl9faW1wb3J0RGVmYXVsdCIsInJlcXVpcmUiLCJsYW5ndWFnZV8xIiwiSmhpSXRlbUNvdW50IiwiZGVmYXVsdCIsIkNvbXBvbmVudCIsImNvbnN0cnVjdG9yIiwicHJvcHMiLCJpMThuVmFsdWVzIiwicGFnZSIsInRvdGFsIiwiaXRlbXNQZXJQYWdlIiwiZmlyc3QiLCJzZWNvbmQiLCJyZW5kZXIiLCJpMThuRW5hYmxlZCIsImNyZWF0ZUVsZW1lbnQiLCJjbGFzc05hbWUiLCJUcmFuc2xhdGUiLCJjb250ZW50S2V5IiwiaW50ZXJwb2xhdGUiLCJleHBvcnRzIl0sInNvdXJjZXMiOlsiLi4vLi4vLi4vc3JjL2NvbXBvbmVudC9wYWdpbmF0aW9uL2l0ZW0tY291bnQudHN4Il0sInNvdXJjZXNDb250ZW50IjpbbnVsbF0sIm1hcHBpbmdzIjoiOzs7Ozs7O0FBQUE7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQWtCQSxNQUFBQSxPQUFBLEdBQUFDLE9BQUEsQ0FBQUMsZUFBQSxDQUFBQyxPQUFBO0FBQ0EsTUFBQUMsVUFBQSxHQUFBRCxPQUFBO0FBU0EsTUFBYUUsWUFBYSxTQUFRTCxPQUFBLENBQUFNLE9BQUssQ0FBQ0MsU0FBNkI7RUFDbkVDLFlBQVlDLEtBQUs7SUFDZixLQUFLLENBQUNBLEtBQUssQ0FBQztFQUNkO0VBRUFDLFVBQVVBLENBQUE7SUFDUixNQUFNO01BQUVDLElBQUk7TUFBRUMsS0FBSztNQUFFQztJQUFZLENBQUUsR0FBRyxJQUFJLENBQUNKLEtBQUs7SUFFaEQsTUFBTUssS0FBSyxHQUFHLENBQUNILElBQUksR0FBRyxDQUFDLElBQUlFLFlBQVksS0FBSyxDQUFDLEdBQUcsQ0FBQyxHQUFHLENBQUNGLElBQUksR0FBRyxDQUFDLElBQUlFLFlBQVksR0FBRyxDQUFDO0lBQ2pGLE1BQU1FLE1BQU0sR0FBR0osSUFBSSxHQUFHRSxZQUFZLEdBQUdELEtBQUssR0FBR0QsSUFBSSxHQUFHRSxZQUFZLEdBQUdELEtBQUs7SUFFeEUsT0FBTztNQUNMRSxLQUFLO01BQ0xDLE1BQU07TUFDTkg7S0FDRDtFQUNIO0VBRUFJLE1BQU1BLENBQUE7SUFDSixNQUFNO01BQUVMLElBQUk7TUFBRUMsS0FBSztNQUFFQyxZQUFZO01BQUVJO0lBQVcsQ0FBRSxHQUFHLElBQUksQ0FBQ1IsS0FBSztJQUM3RCxPQUNFVCxPQUFBLENBQUFNLE9BQUEsQ0FBQVksYUFBQTtNQUFLQyxTQUFTLEVBQUM7SUFBcUIsR0FDakNGLFdBQVcsR0FDVmpCLE9BQUEsQ0FBQU0sT0FBQSxDQUFBWSxhQUFBLENBQUNkLFVBQUEsQ0FBQWdCLFNBQVM7TUFBQ0MsVUFBVSxFQUFDLG1CQUFtQjtNQUFDQyxXQUFXLEVBQUUsSUFBSSxDQUFDWixVQUFVO0lBQUUsV0FFNUQsR0FFWlYsT0FBQSxDQUFBTSxPQUFBLENBQUFZLGFBQUEsZSxZQUNXLENBQUNQLElBQUksR0FBRyxDQUFDLElBQUlFLFlBQVksS0FBSyxDQUFDLEdBQUcsQ0FBQyxHQUFHLENBQUNGLElBQUksR0FBRyxDQUFDLElBQUlFLFlBQVksR0FBRyxDQUFDLEUsTUFBSSxHQUFHLEVBQ2xGRixJQUFJLEdBQUdFLFlBQVksR0FBR0QsS0FBSyxHQUFHRCxJQUFJLEdBQUdFLFlBQVksR0FBR0QsS0FBSyxFLFFBQU1BLEtBQUssRSxVQUV4RSxDQUNHO0VBRVY7O0FBbENGVyxPQUFBLENBQUFsQixZQUFBLEdBQUFBLFlBQUEiLCJpZ25vcmVMaXN0IjpbXX0=

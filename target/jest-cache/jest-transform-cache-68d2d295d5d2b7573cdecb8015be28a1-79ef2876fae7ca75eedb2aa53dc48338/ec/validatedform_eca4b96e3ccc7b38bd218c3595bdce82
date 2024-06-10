@@ -1,0 +1,362 @@
+0ce73ae72522080bef15209471988167
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.isEmail = exports.ValidatedBlobField = exports.ValidatedField = exports.ValidatedInput = exports.ValidatedForm = void 0;
+const tslib_1 = require("tslib");
+/*
+ Copyright 2017-2023 the original author or authors from the JHipster project.
+
+ This file is part of the JHipster project, see https://www.jhipster.tech/
+ for more information.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+const react_1 = tslib_1.__importDefault(require("react"));
+const react_2 = require("react");
+const react_hook_form_1 = require("react-hook-form");
+const reactstrap_1 = require("reactstrap");
+const util_1 = require("../util");
+/**
+ * A wrapper for simple validated forms using Reactstrap Form and React-hook-form.
+ * The validated fields/inputs must be direct children of the form.
+ * This components injects methods and values from react-hook-form's `useForm` hook into the ValidatedField/ValidatedInput components
+ * For complex use cases or for nested children, use Reactstrap form elements
+ * or ValidatedField or ValidatedInput and pass methods and values from react-hook-form's `useForm` hook
+ * directly as props
+ *
+ * @param ValidatedFormProps
+ * @returns JSX.Element
+ */
+function ValidatedForm(_a) {
+  var {
+      defaultValues,
+      children,
+      onSubmit,
+      mode
+    } = _a,
+    rest = tslib_1.__rest(_a, ["defaultValues", "children", "onSubmit", "mode"]);
+  const {
+    handleSubmit,
+    register,
+    reset,
+    setValue,
+    formState: {
+      errors,
+      touchedFields,
+      dirtyFields
+    }
+  } = (0, react_hook_form_1.useForm)({
+    mode: mode || 'onTouched',
+    defaultValues
+  });
+  (0, react_2.useEffect)(() => {
+    reset(defaultValues);
+  }, [reset, defaultValues]);
+  return react_1.default.createElement(reactstrap_1.Form, Object.assign({
+    onSubmit: handleSubmit(onSubmit)
+  }, rest), react_1.default.Children.map(children, child => {
+    var _a;
+    const type = child === null || child === void 0 ? void 0 : child.type;
+    const isValidated = type && ((_a = child === null || child === void 0 ? void 0 : child.props) === null || _a === void 0 ? void 0 : _a.name) && ['ValidatedField', 'ValidatedInput', 'ValidatedBlobField'].includes(type.displayName);
+    if (isValidated) {
+      const childName = child.props.name;
+      const elem = Object.assign(Object.assign({}, child.props), {
+        register: child.props.register || register,
+        error: child.props.error || errors[childName],
+        isTouched: typeof child.props.isTouched === 'undefined' ? touchedFields[childName] : child.props.isTouched,
+        isDirty: typeof child.props.isDirty === 'undefined' ? dirtyFields[childName] : child.props.isDirty,
+        key: childName
+      });
+      if (type.displayName === 'ValidatedBlobField') {
+        const defaultValue = defaultValues[childName];
+        const defaultContentType = defaultValues[`${childName}ContentType`];
+        elem.setValue = typeof child.props.setValue === 'undefined' ? setValue : child.props.setValue;
+        elem.defaultValue = typeof child.props.defaultValue === 'undefined' ? defaultValue : child.props.defaultValue;
+        elem.defaultContentType = typeof child.props.defaultContentType === 'undefined' ? defaultContentType : child.props.defaultContentType;
+      }
+      return react_1.default.createElement(type, Object.assign({}, elem));
+    }
+    return child;
+  }));
+}
+exports.ValidatedForm = ValidatedForm;
+ValidatedForm.displayName = 'ValidatedForm';
+/**
+ * A utility wrapper over Reactstrap Input component thats uses react-hook-form data to
+ * show error message and error/validated styles.
+ * This component can be used with ValidatedForm
+ *
+ * @param ValidatedInputProps
+ * @returns JSX.Element
+ */
+function ValidatedInput(_a) {
+  var {
+      name,
+      id = name,
+      register,
+      error,
+      isTouched,
+      isDirty,
+      validate,
+      children,
+      className,
+      onChange,
+      onBlur
+    } = _a,
+    attributes = tslib_1.__rest(_a, ["name", "id", "register", "error", "isTouched", "isDirty", "validate", "children", "className", "onChange", "onBlur"]);
+  if (!register) {
+    return react_1.default.createElement(reactstrap_1.Input, Object.assign({
+      name: name,
+      id: id,
+      className: className,
+      onChange: onChange,
+      onBlur: onBlur
+    }, attributes), children);
+  }
+  className = className || '';
+  className = isTouched ? `${className} is-touched` : className;
+  className = isDirty ? `${className} is-dirty` : className;
+  const {
+    name: registeredName,
+    onBlur: onBlurValidate,
+    onChange: onChangeValidate,
+    ref
+  } = register(name, validate);
+  return react_1.default.createElement(react_1.default.Fragment, null, react_1.default.createElement(reactstrap_1.Input, Object.assign({
+    name: registeredName,
+    id: id,
+    valid: isTouched && !error,
+    invalid: !!error,
+    innerRef: ref,
+    className: className,
+    onChange: e => {
+      void onChangeValidate(e);
+      onChange && onChange(e);
+    },
+    onBlur: e => {
+      void onBlurValidate(e);
+      onBlur && onBlur(e);
+    }
+  }, attributes), children), error && react_1.default.createElement(reactstrap_1.FormFeedback, null, error.message));
+}
+exports.ValidatedInput = ValidatedInput;
+ValidatedInput.displayName = 'ValidatedInput';
+/**
+ * A utility wrapper over Reactstrap FormGroup + Label + ValidatedInput
+ * that uses react-hook-form data to show error message and error/validated styles.
+ * This component can be used with ValidatedForm
+ *
+ * @param ValidatedFieldProps
+ * @returns JSX.Element
+ */
+function ValidatedField(_a) {
+  var {
+      children,
+      name,
+      id,
+      disabled,
+      className,
+      check,
+      row,
+      col,
+      tag,
+      label,
+      labelClass,
+      labelHidden,
+      inputClass,
+      inputTag,
+      hidden
+    } = _a,
+    attributes = tslib_1.__rest(_a, ["children", "name", "id", "disabled", "className", "check", "row", "col", "tag", "label", "labelClass", "labelHidden", "inputClass", "inputTag", "hidden"]);
+  const input = react_1.default.createElement(ValidatedInput, Object.assign({
+    name: name,
+    id: id,
+    disabled: disabled,
+    className: inputClass,
+    hidden: hidden,
+    tag: inputTag
+  }, attributes), children);
+  const inputRow = row ? react_1.default.createElement(reactstrap_1.Col, Object.assign({}, col), input) : input;
+  return react_1.default.createElement(reactstrap_1.FormGroup, {
+    check: check,
+    disabled: disabled,
+    row: row,
+    className: className,
+    hidden: hidden,
+    tag: tag
+  }, check && inputRow, label && react_1.default.createElement(reactstrap_1.Label, {
+    id: `${name}Label`,
+    check: check,
+    for: id,
+    className: labelClass,
+    hidden: labelHidden || hidden
+  }, label), !check && inputRow);
+}
+exports.ValidatedField = ValidatedField;
+ValidatedField.displayName = 'ValidatedField';
+/**
+ * A utility wrapper over Reactstrap FormGroup + Label + Input for blobs and images
+ * that uses react-hook-form data to show error message and error/validated styles.
+ * This component can be used with ValidatedForm
+ *
+ * @param ValidatedBlobFieldProps
+ * @returns JSX.Element
+ */
+function ValidatedBlobField(_a) {
+  var {
+      name,
+      register,
+      setValue,
+      error,
+      isTouched,
+      isDirty,
+      validate,
+      children,
+      className,
+      onChange,
+      onBlur,
+      id = name,
+      disabled,
+      row,
+      col,
+      tag,
+      label,
+      labelClass,
+      labelHidden,
+      inputClass,
+      inputTag,
+      hidden,
+      defaultValue,
+      defaultContentType,
+      isImage,
+      imageStyle,
+      imageClassName,
+      clearBtn,
+      openActionLabel,
+      // will be ignored as type will always be `file`
+      type,
+      check
+    } = _a,
+    attributes = tslib_1.__rest(_a, ["name", "register", "setValue", "error", "isTouched", "isDirty", "validate", "children", "className", "onChange", "onBlur", "id", "disabled", "row", "col", "tag", "label", "labelClass", "labelHidden", "inputClass", "inputTag", "hidden", "defaultValue", "defaultContentType", "isImage", "imageStyle", "imageClassName", "clearBtn", "openActionLabel", "type", "check"]);
+  const [blob, setBlobData] = (0, react_2.useState)(defaultValue);
+  const [blobContentType, setBlobContentType] = (0, react_2.useState)(defaultContentType);
+  const contentTypeName = `${name}ContentType`;
+  const setBlobValue = (data, contentType) => {
+    setBlobData(data);
+    setBlobContentType(contentType);
+    setValue(contentTypeName, contentType, {
+      shouldValidate: true,
+      shouldDirty: true
+    });
+    setValue(name, data, {
+      shouldValidate: true,
+      shouldDirty: true
+    });
+  };
+  const clearBlob = () => {
+    setBlobValue(null, null);
+  };
+  const renderFormGroup = inner => react_1.default.createElement(reactstrap_1.FormGroup, {
+    disabled: disabled,
+    row: row,
+    className: className,
+    hidden: hidden,
+    tag: tag
+  }, label && react_1.default.createElement(reactstrap_1.Label, {
+    id: `${name}Label`,
+    for: id,
+    className: labelClass,
+    hidden: labelHidden || hidden
+  }, label), inner);
+  const inputRow = input => row ? react_1.default.createElement(reactstrap_1.Col, Object.assign({}, col), input) : input;
+  if (!register) {
+    return renderFormGroup(inputRow(react_1.default.createElement(reactstrap_1.Input, Object.assign({
+      type: "file",
+      id: id,
+      name: name,
+      className: className,
+      onChange: onChange,
+      onBlur: onBlur
+    }, attributes))));
+  }
+  className = className || '';
+  className = isTouched ? `${className} is-touched` : className;
+  className = isDirty ? `${className} is-dirty` : className;
+  (0, react_2.useEffect)(() => {
+    register(name, validate);
+    register(contentTypeName, validate);
+  }, [register]);
+  const input = react_1.default.createElement(react_1.default.Fragment, null, react_1.default.createElement("input", {
+    id: `file_${name}_content_type`,
+    name: contentTypeName,
+    type: "hidden"
+  }), react_1.default.createElement(reactstrap_1.Input, Object.assign({
+    type: "file",
+    id: id,
+    name: name,
+    valid: isTouched && !error,
+    invalid: !!error,
+    className: className,
+    onChange: e => {
+      (0, util_1.setFileData)(e, (contentType, data) => {
+        setBlobValue(data, contentType);
+      }, isImage);
+      onChange && onChange(e);
+    },
+    onBlur: e => {
+      (0, util_1.setFileData)(e, (contentType, data) => {
+        setBlobValue(data, contentType);
+      }, isImage);
+      onBlur && onBlur(e);
+    }
+  }, attributes)), error && react_1.default.createElement(reactstrap_1.FormFeedback, null, error.message));
+  const defaultClearBtn = react_1.default.createElement(reactstrap_1.Button, {
+    color: "danger",
+    size: "sm",
+    onClick: clearBlob
+  }, react_1.default.createElement("strong", null, "\u00A0x\u00A0"));
+  return renderFormGroup(react_1.default.createElement(react_1.default.Fragment, null, react_1.default.createElement("br", null), blob ? react_1.default.createElement("div", {
+    className: "mb-3 mt-2 jhi-validated-blob-field-item-container"
+  }, blobContentType ? react_1.default.createElement("a", {
+    onClick: (0, util_1.openFile)(blobContentType, blob),
+    className: "jhi-validated-blob-field-item-anchor"
+  }, isImage ? react_1.default.createElement("img", {
+    src: `data:${blobContentType};base64,${blob}`,
+    style: imageStyle || {
+      maxHeight: '100px'
+    },
+    className: imageClassName
+  }) : openActionLabel || 'Open') : null, react_1.default.createElement("br", null), react_1.default.createElement(reactstrap_1.Row, {
+    className: "jhi-validated-blob-field-item-row"
+  }, react_1.default.createElement(reactstrap_1.Col, {
+    md: "11",
+    className: "jhi-validated-blob-field-item-row-col"
+  }, react_1.default.createElement("span", null, blobContentType, ", ", (0, util_1.byteSize)(blob))), react_1.default.createElement(reactstrap_1.Col, {
+    md: "1",
+    className: "jhi-validated-blob-field-item-row-col jhi-validated-blob-field-item-clear-btn"
+  }, clearBtn ? clearBtn(clearBlob) : defaultClearBtn))) : null, inputRow(input)));
+}
+exports.ValidatedBlobField = ValidatedBlobField;
+ValidatedBlobField.displayName = 'ValidatedBlobField';
+const EMAIL_REGEXP = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/i;
+function isEmail(value) {
+  if ((0, util_1.isEmpty)(value)) return true;
+  return EMAIL_REGEXP.test(value);
+}
+exports.isEmail = isEmail;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJyZWFjdF8xIiwidHNsaWJfMSIsIl9faW1wb3J0RGVmYXVsdCIsInJlcXVpcmUiLCJyZWFjdF8yIiwicmVhY3RfaG9va19mb3JtXzEiLCJyZWFjdHN0cmFwXzEiLCJ1dGlsXzEiLCJWYWxpZGF0ZWRGb3JtIiwiX2EiLCJkZWZhdWx0VmFsdWVzIiwiY2hpbGRyZW4iLCJvblN1Ym1pdCIsIm1vZGUiLCJyZXN0IiwiX19yZXN0IiwiaGFuZGxlU3VibWl0IiwicmVnaXN0ZXIiLCJyZXNldCIsInNldFZhbHVlIiwiZm9ybVN0YXRlIiwiZXJyb3JzIiwidG91Y2hlZEZpZWxkcyIsImRpcnR5RmllbGRzIiwidXNlRm9ybSIsInVzZUVmZmVjdCIsImRlZmF1bHQiLCJjcmVhdGVFbGVtZW50IiwiRm9ybSIsIk9iamVjdCIsImFzc2lnbiIsIkNoaWxkcmVuIiwibWFwIiwiY2hpbGQiLCJ0eXBlIiwiaXNWYWxpZGF0ZWQiLCJwcm9wcyIsIm5hbWUiLCJpbmNsdWRlcyIsImRpc3BsYXlOYW1lIiwiY2hpbGROYW1lIiwiZWxlbSIsImVycm9yIiwiaXNUb3VjaGVkIiwiaXNEaXJ0eSIsImtleSIsImRlZmF1bHRWYWx1ZSIsImRlZmF1bHRDb250ZW50VHlwZSIsImV4cG9ydHMiLCJWYWxpZGF0ZWRJbnB1dCIsImlkIiwidmFsaWRhdGUiLCJjbGFzc05hbWUiLCJvbkNoYW5nZSIsIm9uQmx1ciIsImF0dHJpYnV0ZXMiLCJJbnB1dCIsInJlZ2lzdGVyZWROYW1lIiwib25CbHVyVmFsaWRhdGUiLCJvbkNoYW5nZVZhbGlkYXRlIiwicmVmIiwiRnJhZ21lbnQiLCJ2YWxpZCIsImludmFsaWQiLCJpbm5lclJlZiIsImUiLCJGb3JtRmVlZGJhY2siLCJtZXNzYWdlIiwiVmFsaWRhdGVkRmllbGQiLCJkaXNhYmxlZCIsImNoZWNrIiwicm93IiwiY29sIiwidGFnIiwibGFiZWwiLCJsYWJlbENsYXNzIiwibGFiZWxIaWRkZW4iLCJpbnB1dENsYXNzIiwiaW5wdXRUYWciLCJoaWRkZW4iLCJpbnB1dCIsImlucHV0Um93IiwiQ29sIiwiRm9ybUdyb3VwIiwiTGFiZWwiLCJmb3IiLCJWYWxpZGF0ZWRCbG9iRmllbGQiLCJpc0ltYWdlIiwiaW1hZ2VTdHlsZSIsImltYWdlQ2xhc3NOYW1lIiwiY2xlYXJCdG4iLCJvcGVuQWN0aW9uTGFiZWwiLCJibG9iIiwic2V0QmxvYkRhdGEiLCJ1c2VTdGF0ZSIsImJsb2JDb250ZW50VHlwZSIsInNldEJsb2JDb250ZW50VHlwZSIsImNvbnRlbnRUeXBlTmFtZSIsInNldEJsb2JWYWx1ZSIsImRhdGEiLCJjb250ZW50VHlwZSIsInNob3VsZFZhbGlkYXRlIiwic2hvdWxkRGlydHkiLCJjbGVhckJsb2IiLCJyZW5kZXJGb3JtR3JvdXAiLCJpbm5lciIsInNldEZpbGVEYXRhIiwiZGVmYXVsdENsZWFyQnRuIiwiQnV0dG9uIiwiY29sb3IiLCJzaXplIiwib25DbGljayIsIm9wZW5GaWxlIiwic3JjIiwic3R5bGUiLCJtYXhIZWlnaHQiLCJSb3ciLCJtZCIsImJ5dGVTaXplIiwiRU1BSUxfUkVHRVhQIiwiaXNFbWFpbCIsInZhbHVlIiwiaXNFbXB0eSIsInRlc3QiXSwic291cmNlcyI6WyIuLi8uLi9zcmMvZm9ybS92YWxpZGF0ZWQtZm9ybS50c3giXSwic291cmNlc0NvbnRlbnQiOltudWxsXSwibWFwcGluZ3MiOiI7Ozs7Ozs7QUFBQTs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBa0JBO0FBQ0E7QUFDQSxNQUFBQSxPQUFBLEdBQUFDLE9BQUEsQ0FBQUMsZUFBQSxDQUFBQyxPQUFBO0FBQ0EsTUFBQUMsT0FBQSxHQUFBRCxPQUFBO0FBQ0EsTUFBQUUsaUJBQUEsR0FBQUYsT0FBQTtBQVdBLE1BQUFHLFlBQUEsR0FBQUgsT0FBQTtBQUVBLE1BQUFJLE1BQUEsR0FBQUosT0FBQTtBQVVBOzs7Ozs7Ozs7OztBQVdBLFNBQWdCSyxhQUFhQSxDQUFDQyxFQUF3RTtNQUF4RTtNQUFFQyxhQUFhO01BQUVDLFFBQVE7TUFBRUMsUUFBUTtNQUFFQztJQUFJLElBQUFKLEVBQStCO0lB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

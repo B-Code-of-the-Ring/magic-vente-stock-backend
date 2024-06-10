@@ -1,0 +1,191 @@
+92e31f28e44baf1a0c6cae034ff21106
+"use strict";
+
+/* istanbul ignore next */
+function cov_i4du2p613() {
+  var path = "/Users/pcco056/Documents/Cours ITU/ribouchon/magicventestock/src/main/webapp/app/shared/error/error-boundary-routes.tsx";
+  var hash = "e4b3cce94efde259832f1d48ffd1cb9dec97c036";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/Users/pcco056/Documents/Cours ITU/ribouchon/magicventestock/src/main/webapp/app/shared/error/error-boundary-routes.tsx",
+    statementMap: {
+      "0": {
+        start: {
+          line: 2,
+          column: 0
+        },
+        end: {
+          line: 2,
+          column: 62
+        }
+      },
+      "1": {
+        start: {
+          line: 3,
+          column: 16
+        },
+        end: {
+          line: 3,
+          column: 32
+        }
+      },
+      "2": {
+        start: {
+          line: 4,
+          column: 16
+        },
+        end: {
+          line: 4,
+          column: 57
+        }
+      },
+      "3": {
+        start: {
+          line: 5,
+          column: 27
+        },
+        end: {
+          line: 5,
+          column: 54
+        }
+      },
+      "4": {
+        start: {
+          line: 6,
+          column: 25
+        },
+        end: {
+          line: 6,
+          column: 92
+        }
+      },
+      "5": {
+        start: {
+          line: 7,
+          column: 28
+        },
+        end: {
+          line: 11,
+          column: 1
+        }
+      },
+      "6": {
+        start: {
+          line: 8,
+          column: 4
+        },
+        end: {
+          line: 10,
+          column: 95
+        }
+      },
+      "7": {
+        start: {
+          line: 12,
+          column: 0
+        },
+        end: {
+          line: 12,
+          column: 38
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "(anonymous_0)",
+        decl: {
+          start: {
+            line: 7,
+            column: 28
+          },
+          end: {
+            line: 7,
+            column: 29
+          }
+        },
+        loc: {
+          start: {
+            line: 7,
+            column: 46
+          },
+          end: {
+            line: 11,
+            column: 1
+          }
+        },
+        line: 7
+      }
+    },
+    branchMap: {},
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    },
+    f: {
+      "0": 0
+    },
+    b: {},
+    inputSourceMap: {
+      file: "/Users/pcco056/Documents/Cours ITU/ribouchon/magicventestock/src/main/webapp/app/shared/error/error-boundary-routes.tsx",
+      mappings: ";;;AAAA,0DAA0B;AAC1B,uDAAsE;AACtE,6FAA4D;AAE5D,MAAM,mBAAmB,GAAG,CAAC,EAAE,QAAQ,EAAe,EAAE,EAAE;IACxD,OAAO,CACL,8BAAC,yBAAM;QACL,8BAAC,wBAAK,IACJ,OAAO,EACL,8BAAC,wBAAa;gBACZ,8BAAC,yBAAM,OAAG,CACI,IAGjB,QAAQ,CACH,CACD,CACV,CAAC;AACJ,CAAC,CAAC;AAEF,kBAAe,mBAAmB,CAAC",
+      names: [],
+      sources: ["/Users/pcco056/Documents/Cours ITU/ribouchon/magicventestock/src/main/webapp/app/shared/error/error-boundary-routes.tsx"],
+      sourcesContent: ["import React from 'react';\nimport { Outlet, Route, Routes, RoutesProps } from 'react-router-dom';\nimport ErrorBoundary from 'app/shared/error/error-boundary';\n\nconst ErrorBoundaryRoutes = ({ children }: RoutesProps) => {\n  return (\n    <Routes>\n      <Route\n        element={\n          <ErrorBoundary>\n            <Outlet />\n          </ErrorBoundary>\n        }\n      >\n        {children}\n      </Route>\n    </Routes>\n  );\n};\n\nexport default ErrorBoundaryRoutes;\n"],
+      version: 3
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "e4b3cce94efde259832f1d48ffd1cb9dec97c036"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_i4du2p613 = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+cov_i4du2p613();
+cov_i4du2p613().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+const tslib_1 =
+/* istanbul ignore next */
+(cov_i4du2p613().s[1]++, require("tslib"));
+const react_1 =
+/* istanbul ignore next */
+(cov_i4du2p613().s[2]++, tslib_1.__importDefault(require("react")));
+const react_router_dom_1 =
+/* istanbul ignore next */
+(cov_i4du2p613().s[3]++, require("react-router-dom"));
+const error_boundary_1 =
+/* istanbul ignore next */
+(cov_i4du2p613().s[4]++, tslib_1.__importDefault(require("app/shared/error/error-boundary")));
+/* istanbul ignore next */
+cov_i4du2p613().s[5]++;
+const ErrorBoundaryRoutes = ({
+  children
+}) => {
+  /* istanbul ignore next */
+  cov_i4du2p613().f[0]++;
+  cov_i4du2p613().s[6]++;
+  return react_1.default.createElement(react_router_dom_1.Routes, null, react_1.default.createElement(react_router_dom_1.Route, {
+    element: react_1.default.createElement(error_boundary_1.default, null, react_1.default.createElement(react_router_dom_1.Outlet, null))
+  }, children));
+};
+/* istanbul ignore next */
+cov_i4du2p613().s[7]++;
+exports.default = ErrorBoundaryRoutes;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJyZWFjdF8xIiwiY292X2k0ZHUycDYxMyIsInMiLCJ0c2xpYl8xIiwiX19pbXBvcnREZWZhdWx0IiwicmVxdWlyZSIsInJlYWN0X3JvdXRlcl9kb21fMSIsImVycm9yX2JvdW5kYXJ5XzEiLCJFcnJvckJvdW5kYXJ5Um91dGVzIiwiY2hpbGRyZW4iLCJmIiwiZGVmYXVsdCIsImNyZWF0ZUVsZW1lbnQiLCJSb3V0ZXMiLCJSb3V0ZSIsImVsZW1lbnQiLCJPdXRsZXQiLCJleHBvcnRzIl0sInNvdXJjZXMiOlsiL1VzZXJzL3BjY28wNTYvRG9jdW1lbnRzL0NvdXJzIElUVS9yaWJvdWNob24vbWFnaWN2ZW50ZXN0b2NrL3NyYy9tYWluL3dlYmFwcC9hcHAvc2hhcmVkL2Vycm9yL2Vycm9yLWJvdW5kYXJ5LXJvdXRlcy50c3giXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IFJlYWN0IGZyb20gJ3JlYWN0JztcbmltcG9ydCB7IE91dGxldCwgUm91dGUsIFJvdXRlcywgUm91dGVzUHJvcHMgfSBmcm9tICdyZWFjdC1yb3V0ZXItZG9tJztcbmltcG9ydCBFcnJvckJvdW5kYXJ5IGZyb20gJ2FwcC9zaGFyZWQvZXJyb3IvZXJyb3ItYm91bmRhcnknO1xuXG5jb25zdCBFcnJvckJvdW5kYXJ5Um91dGVzID0gKHsgY2hpbGRyZW4gfTogUm91dGVzUHJvcHMpID0+IHtcbiAgcmV0dXJuIChcbiAgICA8Um91dGVzPlxuICAgICAgPFJvdXRlXG4gICAgICAgIGVsZW1lbnQ9e1xuICAgICAgICAgIDxFcnJvckJvdW5kYXJ5PlxuICAgICAgICAgICAgPE91dGxldCAvPlxuICAgICAgICAgIDwvRXJyb3JCb3VuZGFyeT5cbiAgICAgICAgfVxuICAgICAgPlxuICAgICAgICB7Y2hpbGRyZW59XG4gICAgICA8L1JvdXRlPlxuICAgIDwvUm91dGVzPlxuICApO1xufTtcblxuZXhwb3J0IGRlZmF1bHQgRXJyb3JCb3VuZGFyeVJvdXRlcztcbiJdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsTUFBQUEsT0FBQTtBQUFBO0FBQUEsQ0FBQUMsYUFBQSxHQUFBQyxDQUFBLE9BQUFDLE9BQUEsQ0FBQUMsZUFBQSxDQUFBQyxPQUFBO0FBQ0EsTUFBQUMsa0JBQUE7QUFBQTtBQUFBLENBQUFMLGFBQUEsR0FBQUMsQ0FBQSxPQUFBRyxPQUFBO0FBQ0EsTUFBQUUsZ0JBQUE7QUFBQTtBQUFBLENBQUFOLGFBQUEsR0FBQUMsQ0FBQSxPQUFBQyxPQUFBLENBQUFDLGVBQUEsQ0FBQUMsT0FBQTtBQUE0RDtBQUFBSixhQUFBLEdBQUFDLENBQUE7QUFFNUQsTUFBTU0sbUJBQW1CLEdBQUdBLENBQUM7RUFBRUM7QUFBUSxDQUFlLEtBQUk7RUFBQTtFQUFBUixhQUFBLEdBQUFTLENBQUE7RUFBQVQsYUFBQSxHQUFBQyxDQUFBO0VBQ3hELE9BQ0VGLE9BQUEsQ0FBQVcsT0FBQSxDQUFBQyxhQUFBLENBQUNOLGtCQUFBLENBQUFPLE1BQU0sUUFDTGIsT0FBQSxDQUFBVyxPQUFBLENBQUFDLGFBQUEsQ0FBQ04sa0JBQUEsQ0FBQVEsS0FBSztJQUNKQyxPQUFPLEVBQ0xmLE9BQUEsQ0FBQVcsT0FBQSxDQUFBQyxhQUFBLENBQUNMLGdCQUFBLENBQUFJLE9BQWEsUUFDWlgsT0FBQSxDQUFBVyxPQUFBLENBQUFDLGFBQUEsQ0FBQ04sa0JBQUEsQ0FBQVUsTUFBTSxPQUFHO0VBQ0ksR0FHakJQLFFBQVEsQ0FDSCxDQUNEO0FBRWIsQ0FBQztBQUFDO0FBQUFSLGFBQUEsR0FBQUMsQ0FBQTtBQUVGZSxPQUFBLENBQUFOLE9BQUEsR0FBZUgsbUJBQW1CIiwiaWdub3JlTGlzdCI6W119

@@ -1,0 +1,26 @@
+68125bf1224a1f0dea0ca8eca99caac4
+var basePick = require('./_basePick'),
+  flatRest = require('./_flatRest');
+
+/**
+ * Creates an object composed of the picked `object` properties.
+ *
+ * @static
+ * @since 0.1.0
+ * @memberOf _
+ * @category Object
+ * @param {Object} object The source object.
+ * @param {...(string|string[])} [paths] The property paths to pick.
+ * @returns {Object} Returns the new object.
+ * @example
+ *
+ * var object = { 'a': 1, 'b': '2', 'c': 3 };
+ *
+ * _.pick(object, ['a', 'c']);
+ * // => { 'a': 1, 'c': 3 }
+ */
+var pick = flatRest(function (object, paths) {
+  return object == null ? {} : basePick(object, paths);
+});
+module.exports = pick;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJiYXNlUGljayIsInJlcXVpcmUiLCJmbGF0UmVzdCIsInBpY2siLCJvYmplY3QiLCJwYXRocyIsIm1vZHVsZSIsImV4cG9ydHMiXSwic291cmNlcyI6WyJwaWNrLmpzIl0sInNvdXJjZXNDb250ZW50IjpbInZhciBiYXNlUGljayA9IHJlcXVpcmUoJy4vX2Jhc2VQaWNrJyksXG4gICAgZmxhdFJlc3QgPSByZXF1aXJlKCcuL19mbGF0UmVzdCcpO1xuXG4vKipcbiAqIENyZWF0ZXMgYW4gb2JqZWN0IGNvbXBvc2VkIG9mIHRoZSBwaWNrZWQgYG9iamVjdGAgcHJvcGVydGllcy5cbiAqXG4gKiBAc3RhdGljXG4gKiBAc2luY2UgMC4xLjBcbiAqIEBtZW1iZXJPZiBfXG4gKiBAY2F0ZWdvcnkgT2JqZWN0XG4gKiBAcGFyYW0ge09iamVjdH0gb2JqZWN0IFRoZSBzb3VyY2Ugb2JqZWN0LlxuICogQHBhcmFtIHsuLi4oc3RyaW5nfHN0cmluZ1tdKX0gW3BhdGhzXSBUaGUgcHJvcGVydHkgcGF0aHMgdG8gcGljay5cbiAqIEByZXR1cm5zIHtPYmplY3R9IFJldHVybnMgdGhlIG5ldyBvYmplY3QuXG4gKiBAZXhhbXBsZVxuICpcbiAqIHZhciBvYmplY3QgPSB7ICdhJzogMSwgJ2InOiAnMicsICdjJzogMyB9O1xuICpcbiAqIF8ucGljayhvYmplY3QsIFsnYScsICdjJ10pO1xuICogLy8gPT4geyAnYSc6IDEsICdjJzogMyB9XG4gKi9cbnZhciBwaWNrID0gZmxhdFJlc3QoZnVuY3Rpb24ob2JqZWN0LCBwYXRocykge1xuICByZXR1cm4gb2JqZWN0ID09IG51bGwgPyB7fSA6IGJhc2VQaWNrKG9iamVjdCwgcGF0aHMpO1xufSk7XG5cbm1vZHVsZS5leHBvcnRzID0gcGljaztcbiJdLCJtYXBwaW5ncyI6IkFBQUEsSUFBSUEsUUFBUSxHQUFHQyxPQUFPLENBQUMsYUFBYSxDQUFDO0VBQ2pDQyxRQUFRLEdBQUdELE9BQU8sQ0FBQyxhQUFhLENBQUM7O0FBRXJDO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQSxJQUFJRSxJQUFJLEdBQUdELFFBQVEsQ0FBQyxVQUFTRSxNQUFNLEVBQUVDLEtBQUssRUFBRTtFQUMxQyxPQUFPRCxNQUFNLElBQUksSUFBSSxHQUFHLENBQUMsQ0FBQyxHQUFHSixRQUFRLENBQUNJLE1BQU0sRUFBRUMsS0FBSyxDQUFDO0FBQ3RELENBQUMsQ0FBQztBQUVGQyxNQUFNLENBQUNDLE9BQU8sR0FBR0osSUFBSSIsImlnbm9yZUxpc3QiOltdfQ==

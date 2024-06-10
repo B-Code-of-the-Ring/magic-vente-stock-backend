@@ -1,0 +1,123 @@
+6ef73bb0e42edb4e6e9ae4ae00ee71fa
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.SystemMetrics = void 0;
+const tslib_1 = require("tslib");
+const react_1 = tslib_1.__importDefault(require("react"));
+const formatter_1 = require("../../formatter");
+const reactstrap_1 = require("reactstrap");
+class SystemMetrics extends react_1.default.Component {
+  static convertMillisecondsToDuration(ms) {
+    const times = {
+      year: 31557600000,
+      month: 2629746000,
+      day: 86400000,
+      hour: 3600000,
+      minute: 60000,
+      second: 1000
+    };
+    let timeString = '';
+    let plural = '';
+    for (const key in times) {
+      if (Math.floor(ms / times[key]) > 0) {
+        plural = Math.floor(ms / times[key]) > 1 ? 's' : '';
+        timeString += Math.floor(ms / times[key]).toString() + ' ' + key.toString() + plural + ' ';
+        ms = ms - times[key] * Math.floor(ms / times[key]);
+      }
+    }
+    return timeString;
+  }
+  render() {
+    const {
+      systemMetrics,
+      wholeNumberFormat,
+      timestampFormat
+    } = this.props;
+    return react_1.default.createElement("div", null, react_1.default.createElement("h4", null, "System"), react_1.default.createElement(reactstrap_1.Row, null, react_1.default.createElement(reactstrap_1.Col, {
+      md: "4"
+    }, "Uptime"), react_1.default.createElement(reactstrap_1.Col, {
+      md: "8",
+      className: "text-end"
+    }, SystemMetrics.convertMillisecondsToDuration(systemMetrics['process.uptime']))), react_1.default.createElement(reactstrap_1.Row, null, react_1.default.createElement(reactstrap_1.Col, {
+      md: "4"
+    }, "Start time"), react_1.default.createElement(reactstrap_1.Col, {
+      md: "8",
+      className: "text-end"
+    }, react_1.default.createElement(formatter_1.TextFormat, {
+      value: systemMetrics['process.start.time'],
+      type: "date",
+      format: timestampFormat
+    }))), react_1.default.createElement(reactstrap_1.Row, null, react_1.default.createElement(reactstrap_1.Col, {
+      md: "9"
+    }, "Process CPU usage"), react_1.default.createElement(reactstrap_1.Col, {
+      md: "3",
+      className: "text-end"
+    }, react_1.default.createElement(formatter_1.TextFormat, {
+      value: 100 * systemMetrics['process.cpu.usage'],
+      type: "number",
+      format: wholeNumberFormat
+    }), " %")), react_1.default.createElement(reactstrap_1.Progress, {
+      animated: true,
+      value: 100 * systemMetrics['process.cpu.usage'],
+      color: "success"
+    }, react_1.default.createElement("span", null, react_1.default.createElement(formatter_1.TextFormat, {
+      value: 100 * systemMetrics['process.cpu.usage'],
+      type: "number",
+      format: wholeNumberFormat
+    }), " %")), react_1.default.createElement(reactstrap_1.Row, null, react_1.default.createElement(reactstrap_1.Col, {
+      md: "9"
+    }, "System CPU usage"), react_1.default.createElement(reactstrap_1.Col, {
+      md: "3",
+      className: "text-end"
+    }, react_1.default.createElement(formatter_1.TextFormat, {
+      value: 100 * systemMetrics['system.cpu.usage'],
+      type: "number",
+      format: wholeNumberFormat
+    }), " %")), react_1.default.createElement(reactstrap_1.Progress, {
+      animated: true,
+      value: 100 * systemMetrics['system.cpu.usage'],
+      color: "success"
+    }, react_1.default.createElement("span", null, react_1.default.createElement(formatter_1.TextFormat, {
+      value: 100 * systemMetrics['system.cpu.usage'],
+      type: "number",
+      format: wholeNumberFormat
+    }), " %")), react_1.default.createElement(reactstrap_1.Row, null, react_1.default.createElement(reactstrap_1.Col, {
+      md: "9"
+    }, "System CPU count"), react_1.default.createElement(reactstrap_1.Col, {
+      md: "3",
+      className: "text-end"
+    }, systemMetrics['system.cpu.count'])), react_1.default.createElement(reactstrap_1.Row, null, react_1.default.createElement(reactstrap_1.Col, {
+      md: "9"
+    }, "System 1m Load average"), react_1.default.createElement(reactstrap_1.Col, {
+      md: "3",
+      className: "text-end"
+    }, react_1.default.createElement(formatter_1.TextFormat, {
+      value: systemMetrics['system.load.average.1m'],
+      type: "number",
+      format: wholeNumberFormat
+    }))), react_1.default.createElement(reactstrap_1.Row, null, react_1.default.createElement(reactstrap_1.Col, {
+      md: "7"
+    }, "Process files max"), react_1.default.createElement(reactstrap_1.Col, {
+      md: "5",
+      className: "text-end"
+    }, react_1.default.createElement(formatter_1.TextFormat, {
+      value: systemMetrics['process.files.max'],
+      type: "number",
+      format: wholeNumberFormat
+    }))), react_1.default.createElement(reactstrap_1.Row, null, react_1.default.createElement(reactstrap_1.Col, {
+      md: "4"
+    }, "Process files open"), react_1.default.createElement(reactstrap_1.Col, {
+      md: "8",
+      className: "text-end"
+    }, react_1.default.createElement(formatter_1.TextFormat, {
+      value: systemMetrics['process.files.open'],
+      type: "number",
+      format: wholeNumberFormat
+    }))));
+  }
+}
+exports.SystemMetrics = SystemMetrics;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJyZWFjdF8xIiwidHNsaWJfMSIsIl9faW1wb3J0RGVmYXVsdCIsInJlcXVpcmUiLCJmb3JtYXR0ZXJfMSIsInJlYWN0c3RyYXBfMSIsIlN5c3RlbU1ldHJpY3MiLCJkZWZhdWx0IiwiQ29tcG9uZW50IiwiY29udmVydE1pbGxpc2Vjb25kc1RvRHVyYXRpb24iLCJtcyIsInRpbWVzIiwieWVhciIsIm1vbnRoIiwiZGF5IiwiaG91ciIsIm1pbnV0ZSIsInNlY29uZCIsInRpbWVTdHJpbmciLCJwbHVyYWwiLCJrZXkiLCJNYXRoIiwiZmxvb3IiLCJ0b1N0cmluZyIsInJlbmRlciIsInN5c3RlbU1ldHJpY3MiLCJ3aG9sZU51bWJlckZvcm1hdCIsInRpbWVzdGFtcEZvcm1hdCIsInByb3BzIiwiY3JlYXRlRWxlbWVudCIsIlJvdyIsIkNvbCIsIm1kIiwiY2xhc3NOYW1lIiwiVGV4dEZvcm1hdCIsInZhbHVlIiwidHlwZSIsImZvcm1hdCIsIlByb2dyZXNzIiwiYW5pbWF0ZWQiLCJjb2xvciIsImV4cG9ydHMiXSwic291cmNlcyI6WyIuLi8uLi8uLi9zcmMvY29tcG9uZW50L21ldHJpY3Mvc3lzdGVtTWV0cmljcy50c3giXSwic291cmNlc0NvbnRlbnQiOltudWxsXSwibWFwcGluZ3MiOiI7Ozs7Ozs7QUFBQSxNQUFBQSxPQUFBLEdBQUFDLE9BQUEsQ0FBQUMsZUFBQSxDQUFBQyxPQUFBO0FBQ0EsTUFBQUMsV0FBQSxHQUFBRCxPQUFBO0FBQ0EsTUFBQUUsWUFBQSxHQUFBRixPQUFBO0FBUUEsTUFBYUcsYUFBYyxTQUFRTixPQUFBLENBQUFPLE9BQUssQ0FBQ0MsU0FBOEI7RUFDckUsT0FBT0MsNkJBQTZCQSxDQUFDQyxFQUFFO0lBQ3JDLE1BQU1DLEtBQUssR0FBRztNQUNaQyxJQUFJLEVBQUUsV0FBVztNQUNqQkMsS0FBSyxFQUFFLFVBQVU7TUFDakJDLEdBQUcsRUFBRSxRQUFRO01BQ2JDLElBQUksRUFBRSxPQUFPO01BQ2JDLE1BQU0sRUFBRSxLQUFLO01BQ2JD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

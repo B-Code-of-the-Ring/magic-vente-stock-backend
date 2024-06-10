@@ -1,0 +1,52 @@
+c979356396503728b570df34c168566e
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.log = exports.logError = exports.logWarn = exports.logInfo = exports.logDebug = void 0;
+const initLevels = () => {
+  if (process.env.LOG_LEVEL) return process.env.LOG_LEVEL;
+  return process.env.NODE_ENV === 'development' ? 'info' : 'error';
+};
+const level = initLevels();
+/**
+ * Log a debug message when debug level or above is enabled
+ * @param msg message
+ * @param data data
+ */
+const logDebug = (msg, ...data) => {
+  // eslint-disable-next-line no-console
+  if (level === 'debug') console.debug(msg, data);
+};
+exports.logDebug = logDebug;
+/**
+ * Log an info message when info level or above is enabled
+ * @param msg message
+ * @param data data
+ */
+const logInfo = (msg, ...data) => {
+  // eslint-disable-next-line no-console
+  if (['debug', 'info'].includes(level)) console.info(msg, data);
+};
+exports.logInfo = logInfo;
+/**
+ * Log a warn message when warn level or above is enabled
+ * @param msg message
+ * @param data data
+ */
+const logWarn = (msg, ...data) => {
+  if (['debug', 'info', 'warn'].includes(level)) console.warn(msg, data);
+};
+exports.logWarn = logWarn;
+/**
+ * Log an error message when error level is enabled
+ * @param msg message
+ * @param data data
+ */
+const logError = (msg, ...data) => {
+  if (['debug', 'info', 'warn', 'error'].includes(level)) console.error(msg, data);
+};
+exports.logError = logError;
+exports.log = exports.logInfo;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJpbml0TGV2ZWxzIiwicHJvY2VzcyIsImVudiIsIkxPR19MRVZFTCIsIk5PREVfRU5WIiwibGV2ZWwiLCJsb2dEZWJ1ZyIsIm1zZyIsImRhdGEiLCJjb25zb2xlIiwiZGVidWciLCJleHBvcnRzIiwibG9nSW5mbyIsImluY2x1ZGVzIiwiaW5mbyIsImxvZ1dhcm4iLCJ3YXJuIiwibG9nRXJyb3IiLCJlcnJvciIsImxvZyJdLCJzb3VyY2VzIjpbIi4uLy4uL3NyYy91dGlsL2xvZy11dGlsLnRzIl0sInNvdXJjZXNDb250ZW50IjpbbnVsbF0sIm1hcHBpbmdzIjoiOzs7Ozs7QUFFQSxNQUFNQSxVQUFVLEdBQUdBLENBQUEsS0FBbUI7RUFDcEMsSUFBSUMsT0FBTyxDQUFDQyxHQUFHLENBQUNDLFNBQVMsRUFBRSxPQUFPRixPQUFPLENBQUNDLEdBQUcsQ0FBQ0MsU0FBeUI7RUFFdkUsT0FBT0YsT0FBTyxDQUFDQyxHQUFHLENBQUNFLFFBQVEsS0FBSyxhQUFhLEdBQUcsTUFBTSxHQUFHLE9BQU87QUFDbEUsQ0FBQztBQUVELE1BQU1DLEtBQUssR0FBaUJMLFVBQVUsRUFBRTtBQUV4Qzs7Ozs7QUFLTyxNQUFNTSxRQUFRLEdBQUdBLENBQUNDLEdBQUcsRUFBRSxHQUFHQyxJQUFJLEtBQVU7RUFDN0M7RUFDQSxJQUFJSCxLQUFLLEtBQUssT0FBTyxFQUFFSSxPQUFPLENBQUNDLEtBQUssQ0FBQ0gsR0FBRyxFQUFFQyxJQUFJLENBQUM7QUFDakQsQ0FBQztBQUhZRyxPQUFBLENBQUFMLFFBQVEsR0FBQUEsUUFBQTtBQUtyQjs7Ozs7QUFLTyxNQUFNTSxPQUFPLEdBQUdBLENBQUNMLEdBQUcsRUFBRSxHQUFHQyxJQUFJLEtBQVU7RUFDNUM7RUFDQSxJQUFJLENBQUMsT0FBTyxFQUFFLE1BQU0sQ0FBQyxDQUFDSyxRQUFRLENBQUNSLEtBQUssQ0FBQyxFQUFFSSxPQUFPLENBQUNLLElBQUksQ0FBQ1AsR0FBRyxFQUFFQyxJQUFJLENBQUM7QUFDaEUsQ0FBQztBQUhZRyxPQUFBLENBQUFDLE9BQU8sR0FBQUEsT0FBQTtBQUtwQjs7Ozs7QUFLTyxNQUFNRyxPQUFPLEdBQUdBLENBQUNSLEdBQUcsRUFBRSxHQUFHQyxJQUFJLEtBQVU7RUFDNUMsSUFBSSxDQUFDLE9BQU8sRUFBRSxNQUFNLEVBQUUsTUFBTSxDQUFDLENBQUNLLFFBQVEsQ0FBQ1IsS0FBSyxDQUFDLEVBQUVJLE9BQU8sQ0FBQ08sSUFBSSxDQUFDVCxHQUFHLEVBQUVDLElBQUksQ0FBQztBQUN4RSxDQUFDO0FBRllHLE9BQUEsQ0FBQUksT0FBTyxHQUFBQSxPQUFBO0FBSXBCOzs7OztBQUtPLE1BQU1FLFFBQVEsR0FBR0EsQ0FBQ1YsR0FBRyxFQUFFLEdBQUdDLElBQUksS0FBVTtFQUM3QyxJQUFJLENBQUMsT0FBTyxFQUFFLE1BQU0sRUFBRSxNQUFNLEVBQUUsT0FBTyxDQUFDLENBQUNLLFFBQVEsQ0FBQ1IsS0FBSyxDQUFDLEVBQUVJLE9BQU8sQ0FBQ1MsS0FBSyxDQUFDWCxHQUFHLEVBQUVDLElBQUksQ0FBQztBQUNsRixDQUFDO0FBRllHLE9BQUEsQ0FBQU0sUUFBUSxHQUFBQSxRQUFBO0FBSVJOLE9BQUEsQ0FBQVEsR0FBRyxHQUFHUixPQUFBLENBQUFDLE9BQU8iLCJpZ25vcmVMaXN0IjpbXX0=

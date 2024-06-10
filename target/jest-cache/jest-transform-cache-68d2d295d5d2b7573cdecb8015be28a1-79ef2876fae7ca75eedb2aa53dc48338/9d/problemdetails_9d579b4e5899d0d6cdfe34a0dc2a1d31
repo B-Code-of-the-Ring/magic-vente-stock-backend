@@ -1,0 +1,237 @@
+5fee2e28619d4efaa30b4fe30fa45525
+"use strict";
+
+/* istanbul ignore next */
+function cov_2nkfn9tppk() {
+  var path = "/Users/pcco056/Documents/Cours ITU/ribouchon/magicventestock/src/main/webapp/app/shared/jhipster/problem-details.ts";
+  var hash = "318d2111222e8209ab01d29a7002d1221782d4fc";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/Users/pcco056/Documents/Cours ITU/ribouchon/magicventestock/src/main/webapp/app/shared/jhipster/problem-details.ts",
+    statementMap: {
+      "0": {
+        start: {
+          line: 2,
+          column: 0
+        },
+        end: {
+          line: 2,
+          column: 62
+        }
+      },
+      "1": {
+        start: {
+          line: 3,
+          column: 0
+        },
+        end: {
+          line: 3,
+          column: 71
+        }
+      },
+      "2": {
+        start: {
+          line: 4,
+          column: 0
+        },
+        end: {
+          line: 4,
+          column: 90
+        }
+      },
+      "3": {
+        start: {
+          line: 5,
+          column: 29
+        },
+        end: {
+          line: 5,
+          column: 129
+        }
+      },
+      "4": {
+        start: {
+          line: 5,
+          column: 39
+        },
+        end: {
+          line: 5,
+          column: 129
+        }
+      },
+      "5": {
+        start: {
+          line: 6,
+          column: 0
+        },
+        end: {
+          line: 6,
+          column: 52
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "(anonymous_0)",
+        decl: {
+          start: {
+            line: 5,
+            column: 29
+          },
+          end: {
+            line: 5,
+            column: 30
+          }
+        },
+        loc: {
+          start: {
+            line: 5,
+            column: 39
+          },
+          end: {
+            line: 5,
+            column: 129
+          }
+        },
+        line: 5
+      }
+    },
+    branchMap: {
+      "0": {
+        loc: {
+          start: {
+            line: 5,
+            column: 40
+          },
+          end: {
+            line: 5,
+            column: 93
+          }
+        },
+        type: "cond-expr",
+        locations: [{
+          start: {
+            line: 5,
+            column: 75
+          },
+          end: {
+            line: 5,
+            column: 81
+          }
+        }, {
+          start: {
+            line: 5,
+            column: 84
+          },
+          end: {
+            line: 5,
+            column: 93
+          }
+        }],
+        line: 5
+      },
+      "1": {
+        loc: {
+          start: {
+            line: 5,
+            column: 40
+          },
+          end: {
+            line: 5,
+            column: 72
+          }
+        },
+        type: "binary-expr",
+        locations: [{
+          start: {
+            line: 5,
+            column: 40
+          },
+          end: {
+            line: 5,
+            column: 53
+          }
+        }, {
+          start: {
+            line: 5,
+            column: 57
+          },
+          end: {
+            line: 5,
+            column: 72
+          }
+        }],
+        line: 5
+      }
+    },
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0
+    },
+    f: {
+      "0": 0
+    },
+    b: {
+      "0": [0, 0],
+      "1": [0, 0]
+    },
+    inputSourceMap: {
+      file: "/Users/pcco056/Documents/Cours ITU/ribouchon/magicventestock/src/main/webapp/app/shared/jhipster/problem-details.ts",
+      mappings: ";;;AAiBa,QAAA,sBAAsB,GAAG,wDAAwD,CAAC;AAexF,MAAM,oBAAoB,GAAG,CAAC,IAAS,EAA8B,EAAE,CAAC,CAAA,IAAI,aAAJ,IAAI,uBAAJ,IAAI,CAAE,IAAI,MAAK,8BAAsB,CAAC;AAAxG,QAAA,oBAAoB,wBAAoF",
+      names: [],
+      sources: ["/Users/pcco056/Documents/Cours ITU/ribouchon/magicventestock/src/main/webapp/app/shared/jhipster/problem-details.ts"],
+      sourcesContent: ["/**\n * Problem details defined in RFC 7807.\n * @see https://datatracker.ietf.org/doc/html/rfc7807#section-3.1\n */\nexport type ProblemDetails = {\n  /** A URI reference that identifies the problem type */\n  type: string;\n  /** A short, human-readable summary of the problem type */\n  title: string;\n  /** The HTTP status code */\n  status: number;\n  /** A human-readable explanation specific to this occurrence of the problem */\n  detail: string;\n  /** A URI reference that identifies the specific occurrence of the problem */\n  instance: string;\n};\n\nexport const ProblemWithMessageType = 'https://www.jhipster.tech/problem/problem-with-message';\n\nexport type FieldErrorVM = { message: string; objectName: string; field: string };\n\nexport type ProblemWithMessage = ProblemDetails & {\n  type: typeof ProblemWithMessageType;\n\n  /** Translation message key */\n  message?: string;\n  /** Request path */\n  path?: string;\n  /** Field errors */\n  fieldErrors?: FieldErrorVM[];\n};\n\nexport const isProblemWithMessage = (data: any): data is ProblemWithMessage => data?.type === ProblemWithMessageType;\n"],
+      version: 3
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "318d2111222e8209ab01d29a7002d1221782d4fc"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_2nkfn9tppk = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+cov_2nkfn9tppk();
+cov_2nkfn9tppk().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+/* istanbul ignore next */
+cov_2nkfn9tppk().s[1]++;
+exports.isProblemWithMessage = exports.ProblemWithMessageType = void 0;
+/* istanbul ignore next */
+cov_2nkfn9tppk().s[2]++;
+exports.ProblemWithMessageType = 'https://www.jhipster.tech/problem/problem-with-message';
+/* istanbul ignore next */
+cov_2nkfn9tppk().s[3]++;
+const isProblemWithMessage = data => {
+  /* istanbul ignore next */
+  cov_2nkfn9tppk().f[0]++;
+  cov_2nkfn9tppk().s[4]++;
+  return (
+  /* istanbul ignore next */
+  (cov_2nkfn9tppk().b[1][0]++, data === null) ||
+  /* istanbul ignore next */
+  (cov_2nkfn9tppk().b[1][1]++, data === void 0) ?
+  /* istanbul ignore next */
+  (cov_2nkfn9tppk().b[0][0]++, void 0) :
+  /* istanbul ignore next */
+  (cov_2nkfn9tppk().b[0][1]++, data.type)) === exports.ProblemWithMessageType;
+};
+/* istanbul ignore next */
+cov_2nkfn9tppk().s[5]++;
+exports.isProblemWithMessage = isProblemWithMessage;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJleHBvcnRzIiwiUHJvYmxlbVdpdGhNZXNzYWdlVHlwZSIsImNvdl8ybmtmbjl0cHBrIiwicyIsImlzUHJvYmxlbVdpdGhNZXNzYWdlIiwiZGF0YSIsImYiLCJiIiwidHlwZSJdLCJzb3VyY2VzIjpbIi9Vc2Vycy9wY2NvMDU2L0RvY3VtZW50cy9Db3VycyBJVFUvcmlib3VjaG9uL21hZ2ljdmVudGVzdG9jay9zcmMvbWFpbi93ZWJhcHAvYXBwL3NoYXJlZC9qaGlwc3Rlci9wcm9ibGVtLWRldGFpbHMudHMiXSwic291cmNlc0NvbnRlbnQiOlsiLyoqXG4gKiBQcm9ibGVtIGRldGFpbHMgZGVmaW5lZCBpbiBSRkMgNzgwNy5cbiAqIEBzZWUgaHR0cHM6Ly9kYXRhdHJhY2tlci5pZXRmLm9yZy9kb2MvaHRtbC9yZmM3ODA3I3NlY3Rpb24tMy4xXG4gKi9cbmV4cG9ydCB0eXBlIFByb2JsZW1EZXRhaWxzID0ge1xuICAvKiogQSBVUkkgcmVmZXJlbmNlIHRoYXQgaWRlbnRpZmllcyB0aGUgcHJvYmxlbSB0eXBlICovXG4gIHR5cGU6IHN0cmluZztcbiAgLyoqIEEgc2hvcnQsIGh1bWFuLXJlYWRhYmxlIHN1bW1hcnkgb2YgdGhlIHByb2JsZW0gdHlwZSAqL1xuICB0aXRsZTogc3RyaW5nO1xuICAvKiogVGhlIEhUVFAgc3RhdHVzIGNvZGUgKi9cbiAgc3RhdHVzOiBudW1iZXI7XG4gIC8qKiBBIGh1bWFuLXJlYWRhYmxlIGV4cGxhbmF0aW9uIHNwZWNpZmljIHRvIHRoaXMgb2NjdXJyZW5jZSBvZiB0aGUgcHJvYmxlbSAqL1xuICBkZXRhaWw6IHN0cmluZztcbiAgLyoqIEEgVVJJIHJlZmVyZW5jZSB0aGF0IGlkZW50aWZpZXMgdGhlIHNwZWNpZmljIG9jY3VycmVuY2Ugb2YgdGhlIHByb2JsZW0gKi9cbiAgaW5zdGFuY2U6IHN0cmluZztcbn07XG5cbmV4cG9ydCBjb25zdCBQcm9ibGVtV2l0aE1lc3NhZ2VUeXBlID0gJ2h0dHBzOi8vd3d3LmpoaXBzdGVyLnRlY2gvcHJvYmxlbS9wcm9ibGVtLXdpdGgtbWVzc2FnZSc7XG5cbmV4cG9ydCB0eXBlIEZpZWxkRXJyb3JWTSA9IHsgbWVzc2FnZTogc3RyaW5nOyBvYmplY3ROYW1lOiBzdHJpbmc7IGZpZWxkOiBzdHJpbmcgfTtcblxuZXhwb3J0IHR5cGUgUHJvYmxlbVdpdGhNZXNzYWdlID0gUHJvYmxlbURldGFpbHMgJiB7XG4gIHR5cGU6IHR5cGVvZiBQcm9ibGVtV2l0aE1lc3NhZ2VUeXBlO1xuXG4gIC8qKiBUcmFuc2xhdGlvbiBtZXNzYWdlIGtleSAqL1xuICBtZXNzYWdlPzogc3RyaW5nO1xuICAvKiogUmVxdWVzdCBwYXRoICovXG4gIHBhdGg/OiBzdHJpbmc7XG4gIC8qKiBGaWVsZCBlcnJvcnMgKi9cbiAgZmllbGRFcnJvcnM/OiBGaWVsZEVycm9yVk1bXTtcbn07XG5cbmV4cG9ydCBjb25zdCBpc1Byb2JsZW1XaXRoTWVzc2FnZSA9IChkYXRhOiBhbnkpOiBkYXRhIGlzIFByb2JsZW1XaXRoTWVzc2FnZSA9PiBkYXRhPy50eXBlID09PSBQcm9ibGVtV2l0aE1lc3NhZ2VUeXBlO1xuIl0sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQWlCYUEsT0FBQSxDQUFBQyxzQkFBc0IsR0FBRyx3REFBd0Q7QUFBQztBQUFBQyxjQUFBLEdBQUFDLENBQUE7QUFleEYsTUFBTUMsb0JBQW9CLEdBQUlDLElBQVMsSUFBaUM7RUFBQTtFQUFBSCxjQUFBLEdBQUFJLENBQUE7RUFBQUosY0FBQSxHQUFBQyxDQUFBO0VBQUE7RUFBQTtFQUFBLENBQUFELGNBQUEsR0FBQUssQ0FBQSxVQUFBRixJQUFJO0VBQUE7RUFBQSxDQUFBSCxjQUFBLEdBQUFLLENBQUEsVUFBSkYsSUFBSTtFQUFBO0VBQUEsQ0FBQUgsY0FBQSxHQUFBSyxDQUFBO0VBQUE7RUFBQSxDQUFBTCxjQUFBLEdBQUFLLENBQUEsVUFBSkYsSUFBSSxDQUFFRyxJQUFJLE9BQUtSLE9BQUEsQ0FBQUMsc0JBQXNCO0FBQXRCLENBQXNCO0FBQUM7QUFBQUMsY0FBQSxHQUFBQyxDQUFBO0FBQXhHSCxPQUFBLENBQUFJLG9CQUFvQixHQUFBQSxvQkFBQSIsImlnbm9yZUxpc3QiOltdfQ==

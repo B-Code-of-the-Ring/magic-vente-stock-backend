@@ -1,0 +1,57 @@
+5f101210c79b8f631bbb5cce15946ad8
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.loadMoreDataWhenScrolled = exports.getPaginationState = exports.getSortState = void 0;
+const url_utils_1 = require("../../util/url-utils");
+const getSortState = (location, sortField = 'id', sortOrder = 'asc') => {
+  const sortParam = (0, url_utils_1.getUrlParameter)('sort', location.search);
+  let sort = sortField;
+  let order = sortOrder;
+  if (sortParam !== '') {
+    sort = sortParam.split(',')[0];
+    order = sortParam.split(',')[1];
+  }
+  return {
+    sort,
+    order
+  };
+};
+exports.getSortState = getSortState;
+const getPaginationState = (location, itemsPerPage, sortField = 'id', sortOrder = 'asc') => {
+  const pageParam = (0, url_utils_1.getUrlParameter)('page', location.search);
+  let activePage = 1;
+  if (pageParam !== '' && !isNaN(parseInt(pageParam, 10))) {
+    activePage = parseInt(pageParam, 10);
+  }
+  const {
+    sort,
+    order
+  } = (0, exports.getSortState)(location, sortField, sortOrder);
+  return {
+    itemsPerPage,
+    sort,
+    order,
+    activePage
+  };
+};
+exports.getPaginationState = getPaginationState;
+/**
+ * Retrieve new data when infinite scrolling
+ * @param currentData
+ * @param incomingData
+ * @param links
+ */
+const loadMoreDataWhenScrolled = (currentData, incomingData, links) => {
+  if (links.first === links.last || !currentData.length) {
+    return incomingData;
+  }
+  if (currentData.length >= incomingData.length) {
+    return [...currentData, ...incomingData];
+  }
+  return null;
+};
+exports.loadMoreDataWhenScrolled = loadMoreDataWhenScrolled;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJ1cmxfdXRpbHNfMSIsInJlcXVpcmUiLCJnZXRTb3J0U3RhdGUiLCJsb2NhdGlvbiIsInNvcnRGaWVsZCIsInNvcnRPcmRlciIsInNvcnRQYXJhbSIsImdldFVybFBhcmFtZXRlciIsInNlYXJjaCIsInNvcnQiLCJvcmRlciIsInNwbGl0IiwiZXhwb3J0cyIsImdldFBhZ2luYXRpb25TdGF0ZSIsIml0ZW1zUGVyUGFnZSIsInBhZ2VQYXJhbSIsImFjdGl2ZVBhZ2UiLCJpc05hTiIsInBhcnNlSW50IiwibG9hZE1vcmVEYXRhV2hlblNjcm9sbGVkIiwiY3VycmVudERhdGEiLCJpbmNvbWluZ0RhdGEiLCJsaW5rcyIsImZpcnN0IiwibGFzdCIsImxlbmd0aCJdLCJzb3VyY2VzIjpbIi4uLy4uLy4uL3NyYy9jb21wb25lbnQvcGFnaW5hdGlvbi9wYWdpbmF0aW9uLXV0aWxzLnRzIl0sInNvdXJjZXNDb250ZW50IjpbbnVsbF0sIm1hcHBpbmdzIjoiOzs7Ozs7QUFBQSxNQUFBQSxXQUFBLEdBQUFDLE9BQUE7QUFZTyxNQUFNQyxZQUFZLEdBQUdBLENBQUNDLFFBQTRCLEVBQUVDLFNBQVMsR0FBRyxJQUFJLEVBQUVDLFNBQVMsR0FBRyxLQUFLLEtBQW9CO0VBQ2hILE1BQU1DLFNBQVMsR0FBRyxJQUFBTixXQUFBLENBQUFPLGVBQWUsRUFBQyxNQUFNLEVBQUVKLFFBQVEsQ0FBQ0ssTUFBTSxDQUFDO0VBQzFELElBQUlDLElBQUksR0FBR0wsU0FBUztFQUNwQixJQUFJTSxLQUFLLEdBQUdMLFNBQVM7RUFDckIsSUFBSUMsU0FBUyxLQUFLLEVBQUUsRUFBRTtJQUNwQkcsSUFBSSxHQUFHSCxTQUFTLENBQUNLLEtBQUssQ0FBQyxHQUFHLENBQUMsQ0FBQyxDQUFDLENBQUM7SUFDOUJELEtBQUssR0FBR0osU0FBUyxDQUFDSyxLQUFLLENBQUMsR0FBRyxDQUFDLENBQUMsQ0FBQyxDQUFDOztFQUVqQyxPQUFPO0lBQUVGLElBQUk7SUFBRUM7RUFBSyxDQUFFO0FBQ3hCLENBQUM7QUFUWUUsT0FBQSxDQUFBVixZQUFZLEdBQUFBLFlBQUE7QUFXbEIsTUFBTVcsa0JBQWtCLEdBQUdBLENBQ2hDVixRQUE0QixFQUM1QlcsWUFBb0IsRUFDcEJWLFNBQVMsR0FBRyxJQUFJLEVBQ2hCQyxTQUFTLEdBQUcsS0FBSyxLQUNPO0VBQ3hCLE1BQU1VLFNBQVMsR0FBRyxJQUFBZixXQUFBLENBQUFPLGVBQWUsRUFBQyxNQUFNLEVBQUVKLFFBQVEsQ0FBQ0ssTUFBTSxDQUFDO0VBQzFELElBQUlRLFVBQVUsR0FBRyxDQUFDO0VBQ2xCLElBQUlELFNBQVMsS0FBSyxFQUFFLElBQUksQ0FBQ0UsS0FBSyxDQUFDQyxRQUFRLENBQUNILFNBQVMsRUFBRSxFQUFFLENBQUMsQ0FBQyxFQUFFO0lBQ3ZEQyxVQUFVLEdBQUdFLFFBQVEsQ0FBQ0gsU0FBUyxFQUFFLEVBQUUsQ0FBQzs7RUFFdEMsTUFBTTtJQUFFTixJQUFJO0lBQUVDO0VBQUssQ0FBRSxHQUFHLElBQUFFLE9BQUEsQ0FBQVYsWUFBWSxFQUFDQyxRQUFRLEVBQUVDLFNBQVMsRUFBRUMsU0FBUyxDQUFDO0VBQ3BFLE9BQU87SUFBRVMsWUFBWTtJQUFFTCxJQUFJO0lBQUVDLEtBQUs7SUFBRU07RUFBVSxDQUFFO0FBQ2xELENBQUM7QUFiWUosT0FBQSxDQUFBQyxrQkFBa0IsR0FBQUEsa0JBQUE7QUFlL0I7Ozs7OztBQU1PLE1BQU1NLHdCQUF3QixHQUFHQSxDQUFDQyxXQUFnQixFQUFFQyxZQUFpQixFQUFFQyxLQUFVLEtBQVM7RUFDL0YsSUFBSUEsS0FBSyxDQUFDQyxLQUFLLEtBQUtELEtBQUssQ0FBQ0UsSUFBSSxJQUFJLENBQUNKLFdBQVcsQ0FBQ0ssTUFBTSxFQUFFO0lBQ3JELE9BQU9KLFlBQVk7O0VBRXJCLElBQUlELFdBQVcsQ0FBQ0ssTUFBTSxJQUFJSixZQUFZLENBQUNJLE1BQU0sRUFBRTtJQUM3QyxPQUFPLENBQUMsR0FBR0wsV0FBVyxFQUFFLEdBQUdDLFlBQVksQ0FBQzs7RUFFMUMsT0FBTyxJQUFJO0FBQ2IsQ0FBQztBQVJZVCxPQUFBLENBQUFPLHdCQUF3QixHQUFBQSx3QkFBQSIsImlnbm9yZUxpc3QiOltdfQ==

@@ -1,0 +1,108 @@
+584a19c572c15e095be0c196438f64ed
+/* -*- Mode: js; js-indent-level: 2; -*- */
+/*
+ * Copyright 2011 Mozilla Foundation and contributors
+ * Licensed under the New BSD license. See LICENSE or:
+ * http://opensource.org/licenses/BSD-3-Clause
+ */
+
+exports.GREATEST_LOWER_BOUND = 1;
+exports.LEAST_UPPER_BOUND = 2;
+
+/**
+ * Recursive implementation of binary search.
+ *
+ * @param aLow Indices here and lower do not contain the needle.
+ * @param aHigh Indices here and higher do not contain the needle.
+ * @param aNeedle The element being searched for.
+ * @param aHaystack The non-empty array being searched.
+ * @param aCompare Function which takes two elements and returns -1, 0, or 1.
+ * @param aBias Either 'binarySearch.GREATEST_LOWER_BOUND' or
+ *     'binarySearch.LEAST_UPPER_BOUND'. Specifies whether to return the
+ *     closest element that is smaller than or greater than the one we are
+ *     searching for, respectively, if the exact element cannot be found.
+ */
+function recursiveSearch(aLow, aHigh, aNeedle, aHaystack, aCompare, aBias) {
+  // This function terminates when one of the following is true:
+  //
+  //   1. We find the exact element we are looking for.
+  //
+  //   2. We did not find the exact element, but we can return the index of
+  //      the next-closest element.
+  //
+  //   3. We did not find the exact element, and there is no next-closest
+  //      element than the one we are searching for, so we return -1.
+  var mid = Math.floor((aHigh - aLow) / 2) + aLow;
+  var cmp = aCompare(aNeedle, aHaystack[mid], true);
+  if (cmp === 0) {
+    // Found the element we are looking for.
+    return mid;
+  } else if (cmp > 0) {
+    // Our needle is greater than aHaystack[mid].
+    if (aHigh - mid > 1) {
+      // The element is in the upper half.
+      return recursiveSearch(mid, aHigh, aNeedle, aHaystack, aCompare, aBias);
+    }
+
+    // The exact needle element was not found in this haystack. Determine if
+    // we are in termination case (3) or (2) and return the appropriate thing.
+    if (aBias == exports.LEAST_UPPER_BOUND) {
+      return aHigh < aHaystack.length ? aHigh : -1;
+    } else {
+      return mid;
+    }
+  } else {
+    // Our needle is less than aHaystack[mid].
+    if (mid - aLow > 1) {
+      // The element is in the lower half.
+      return recursiveSearch(aLow, mid, aNeedle, aHaystack, aCompare, aBias);
+    }
+
+    // we are in termination case (3) or (2) and return the appropriate thing.
+    if (aBias == exports.LEAST_UPPER_BOUND) {
+      return mid;
+    } else {
+      return aLow < 0 ? -1 : aLow;
+    }
+  }
+}
+
+/**
+ * This is an implementation of binary search which will always try and return
+ * the index of the closest element if there is no exact hit. This is because
+ * mappings between original and generated line/col pairs are single points,
+ * and there is an implicit region between each of them, so a miss just means
+ * that you aren't on the very start of a region.
+ *
+ * @param aNeedle The element you are looking for.
+ * @param aHaystack The array that is being searched.
+ * @param aCompare A function which takes the needle and an element in the
+ *     array and returns -1, 0, or 1 depending on whether the needle is less
+ *     than, equal to, or greater than the element, respectively.
+ * @param aBias Either 'binarySearch.GREATEST_LOWER_BOUND' or
+ *     'binarySearch.LEAST_UPPER_BOUND'. Specifies whether to return the
+ *     closest element that is smaller than or greater than the one we are
+ *     searching for, respectively, if the exact element cannot be found.
+ *     Defaults to 'binarySearch.GREATEST_LOWER_BOUND'.
+ */
+exports.search = function search(aNeedle, aHaystack, aCompare, aBias) {
+  if (aHaystack.length === 0) {
+    return -1;
+  }
+  var index = recursiveSearch(-1, aHaystack.length, aNeedle, aHaystack, aCompare, aBias || exports.GREATEST_LOWER_BOUND);
+  if (index < 0) {
+    return -1;
+  }
+
+  // We have found either the exact element, or the next-closest element than
+  // the one we are searching for. However, there may be more than one such
+  // element. Make sure we always return the smallest of these.
+  while (index - 1 >= 0) {
+    if (aCompare(aHaystack[index], aHaystack[index - 1], true) !== 0) {
+      break;
+    }
+    --index;
+  }
+  return index;
+};
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJleHBvcnRzIiwiR1JFQVRFU1RfTE9XRVJfQk9VTkQiLCJMRUFTVF9VUFBFUl9CT1VORCIsInJlY3Vyc2l2ZVNlYXJjaCIsImFMb3ciLCJhSGlnaCIsImFOZWVkbGUiLCJhSGF5c3RhY2siLCJhQ29tcGFyZSIsImFCaWFzIiwibWlkIiwiTWF0aCIsImZsb29yIiwiY21wIiwibGVuZ3RoIiwic2VhcmNoIiwiaW5kZXgiXSwic291cmNlcyI6WyJiaW5hcnktc2VhcmNoLmpzIl0sInNvdXJjZXNDb250ZW50IjpbIi8qIC0qLSBNb2RlOiBqczsganMtaW5kZW50LWxldmVsOiAyOyAtKi0gKi9cbi8qXG4gKiBDb3B5cmlnaHQgMjAxMSBNb3ppbGxhIEZvdW5kYXRpb24gYW5kIGNvbnRyaWJ1dG9yc1xuICogTGljZW5zZWQgdW5kZXIgdGhlIE5ldyBCU0QgbGljZW5zZS4gU2VlIExJQ0VOU0Ugb3I6XG4gKiBodHRwOi8vb3BlbnNvdXJjZS5vcmcvbGljZW5zZXMvQlNELTMtQ2xhdXNlXG4gKi9cblxuZXhwb3J0cy5HUkVBVEVTVF9MT1dFUl9CT1VORCA9IDE7XG5leHBvcnRzLkxFQVNUX1VQUEVSX0JPVU5EID0gMjtcblxuLyoqXG4gKiBSZWN1cnNpdmUgaW1wbGVtZW50YXRpb24gb2YgYmluYXJ5IHNlYXJjaC5cbiAqXG4gKiBAcGFyYW0gYUxvdyBJbmRpY2VzIGhlcmUgYW5kIGxvd2VyIGRvIG5vdCBjb250YWluIHRoZSBuZWVkbGUuXG4gKiBAcGFyYW0gYUhpZ2ggSW5kaWNlcyBoZXJlIGFuZCBoaWdoZXIgZG8gbm90IGNvbnRhaW4gdGhlIG5lZWRsZS5cbiAqIEBwYXJhbSBhTmVlZGxlIFRoZSBlbGVtZW50IGJlaW5nIHNlYXJjaGVkIGZvci5cbiAqIEBwYXJhbSBhSGF5c3RhY2sgVGhlIG5vbi1lbXB0eSBhcnJheSBiZWluZyBzZWFyY2hlZC5cbiAqIEBwYXJhbSBhQ29tcGFyZSBGdW5jdGlvbiB3aGljaCB0YWtlcyB0d28gZWxlbWVudHMgYW5kIHJldHVybnMgLTEsIDAsIG9yIDEuXG4gKiBAcGFyYW0gYUJpYXMgRWl0aGVyICdiaW5hcnlTZWFyY2guR1JFQVRFU1RfTE9XRVJfQk9VTkQnIG9yXG4gKiAgICAgJ2JpbmFyeVNlYXJjaC5MRUFTVF9VUFBFUl9CT1VORCcuIFNwZWNpZmllcyB3aGV0aGVyIHRvIHJldHVybiB0aGVcbiAqICAgICBjbG9zZXN0IGVsZW1lbnQgdGhhdCBpcyBzbWFsbGVyIHRoYW4gb3IgZ3JlYXRlciB0aGFuIHRoZSBvbmUgd2UgYXJlXG4gKiAgICAgc2VhcmNoaW5nIGZvciwgcmVzcGVjdGl2ZWx5LCBpZiB0aGUgZXhhY3QgZWxlbWVudCBjYW5ub3QgYmUgZm91bmQuXG4gKi9cbmZ1bmN0aW9uIHJlY3Vyc2l2ZVNlYXJjaChhTG93LCBhSGlnaCwgYU5lZWRsZSwgYUhheXN0YWNrLCBhQ29tcGFyZSwgYUJpYXMpIHtcbiAgLy8gVGhpcyBmdW5jdGlvbiB0ZXJtaW5hdGVzIHdoZW4gb25lIG9mIHRoZSBmb2xsb3dpbmcgaXMgdHJ1ZTpcbiAgLy9cbiAgLy8gICAxLiBXZSBmaW5kIHRoZSBleGFjdCBlbGVtZW50IHdlIGFyZSBsb29raW5nIGZvci5cbiAgLy9cbiAgLy8gICAyLiBXZSBkaWQgbm90IGZpbmQgdGhlIGV4YWN0IGVsZW1lbnQsIGJ1dCB3ZSBjYW4gcmV0dXJuIHRoZSBpbmRleCBvZlxuICAvLyAgICAgIHRoZSBuZXh0LWNsb3Nlc3QgZWxlbWVudC5cbiAgLy9cbiAgLy8gICAzLiBXZSBkaWQgbm90IGZpbmQgdGhlIGV4YWN0IGVsZW1lbnQsIGFuZCB0aGVyZSBpcyBubyBuZXh0LWNsb3Nlc3RcbiAgLy8gICAgICBlbGVtZW50IHRoYW4gdGhlIG9uZSB3ZSBhcmUgc2VhcmNoaW5nIGZvciwgc28gd2UgcmV0dXJuIC0xLlxuICB2YXIgbWlkID0gTWF0aC5mbG9vcigoYUhpZ2ggLSBhTG93KSAvIDIpICsgYUxvdztcbiAgdmFyIGNtcCA9IGFDb21wYXJlKGFOZWVkbGUsIGFIYXlzdGFja1ttaWRdLCB0cnVlKTtcbiAgaWYgKGNtcCA9PT0gMCkge1xuICAgIC8vIEZvdW5kIHRoZSBlbGVtZW50IHdlIGFyZSBsb29raW5nIGZvci5cbiAgICByZXR1cm4gbWlkO1xuICB9XG4gIGVsc2UgaWYgKGNtcCA+IDApIHtcbiAgICAvLyBPdXIgbmVlZGxlIGlzIGdyZWF0ZXIgdGhhbiBhSGF5c3RhY2tbbWlkXS5cbiAgICBpZiAoYUhpZ2ggLSBtaWQgPiAxKSB7XG4gICAgICAvLyBUaGUgZWxlbWVudCBpcyBpbiB0aGUgdXBwZXIgaGFsZi5cbiAgICAgIHJldHVybiByZWN1cnNpdmVTZWFyY2gobWlkLCBhSGlnaCwgYU5lZWRsZSwgYUhheXN0YWNrLCBhQ29tcGFyZSwgYUJpYXMpO1xuICAgIH1cblxuICAgIC8vIFRoZSBleGFjdCBuZWVkbGUgZWxlbWVudCB3YXMgbm90IGZvdW5kIGluIHRoaXMgaGF5c3RhY2suIERldGVybWluZSBpZlxuICAgIC8vIHdlIGFyZSBpbiB0ZXJtaW5hdGlvbiBjYXNlICgzKSBvciAoMikgYW5kIHJldHVybiB0aGUgYXBwcm9wcmlhdGUgdGhpbmcuXG4gICAgaWYgKGFCaWFzID09IGV4cG9ydHMuTEVBU1RfVVBQRVJfQk9VTkQpIHtcbiAgICAgIHJldHVybiBhSGlnaCA8IGFIYXlzdGFjay5sZW5ndGggPyBhSGlnaCA6IC0xO1xuICAgIH0gZWxzZSB7XG4gICAgICByZXR1cm4gbWlkO1xuICAgIH1cbiAgfVxuICBlbHNlIHtcbiAgICAvLyBPdXIgbmVlZGxlIGlzIGxlc3MgdGhhbiBhSGF5c3RhY2tbbWlkXS5cbiAgICBpZiAobWlkIC0gYUxvdyA+IDEpIHtcbiAgICAgIC8vIFRoZSBlbGVtZW50IGlzIGluIHRoZSBsb3dlciBoYWxmLlxuICAgICAgcmV0dXJuIHJlY3Vyc2l2ZVNlYXJjaChhTG93LCBtaWQsIGFOZWVkbGUsIGFIYXlzdGFjaywgYUNvbXBhcmUsIGFCaWFzKTtcbiAgICB9XG5cbiAgICAvLyB3ZSBhcmUgaW4gdGVybWluYXRpb24gY2FzZSAoMykgb3IgKDIpIGFuZCByZXR1cm4gdGhlIGFwcHJvcHJpYXRlIHRoaW5nLlxuICAgIGlmIChhQmlhcyA9PSBleHBvcnRzLkxFQVNUX1VQUEVSX0JPVU5EKSB7XG4gICAgICByZXR1cm4gbWlkO1xuICAgIH0gZWxzZSB7XG4gICAgICByZXR1cm4gYUxvdyA8IDAgPyAtMSA6IGFMb3c7XG4gICAgfVxuICB9XG59XG5cbi8qKlxuICogVGhpcyBpcyBhbiBpbXBsZW1lbnRhdGlvbiBvZiBiaW5hcnkgc2VhcmNoIHdoaWNoIHdpbGwgYWx3YXlzIHRyeSBhbmQgcmV0dXJuXG4gKiB0aGUgaW5kZXggb2YgdGhlIGNsb3Nlc3QgZWxlbWVudCBpZiB0aGVyZSBpcyBubyBleGFjdCBoaXQuIFRoaXMgaXMgYmVjYXVzZVxuICogbWFwcGluZ3MgYmV0d2VlbiBvcmlnaW5hbCBhbmQgZ2VuZXJhdGVkIGxpbmUvY29sIHBhaXJzIGFyZSBzaW5nbGUgcG9pbnRzLFxuICogYW5kIHRoZXJlIGlzIGFuIGltcGxpY2l0IHJlZ2lvbiBiZXR3ZWVuIGVhY2ggb2YgdGhlbSwgc28gYSBtaXNzIGp1c3QgbWVhbnNcbiAqIHRoYXQgeW91IGFyZW4ndCBvbiB0aGUgdmVyeSBzdGFydCBvZiBhIHJlZ2lvbi5cbiAqXG4gKiBAcGFyYW0gYU5lZWRsZSBUaGUgZWxlbWVudCB5b3UgYXJlIGxvb2tpbmcgZm9yLlxuICogQHBhcmFtIGFIYXlzdGFjayBUaGUgYXJyYXkgdGhhdCBpcyBiZWluZyBzZWFyY2hlZC5cbiAqIEBwYXJhbSBhQ29tcGFyZSBBIGZ1bmN0aW9uIHdoaWNoIHRha2VzIHRoZSBuZWVkbGUgYW5kIGFuIGVsZW1lbnQgaW4gdGhlXG4gKiAgICAgYXJyYXkgYW5kIHJldHVybnMgLTEsIDAsIG9yIDEgZGVwZW5kaW5nIG9uIHdoZXRoZXIgdGhlIG5lZWRsZSBpcyBsZXNzXG4gKiAgICAgdGhhbiwgZXF1YWwgdG8sIG9yIGdyZWF0ZXIgdGhhbiB0aGUgZWxlbWVudCwgcmVzcGVjdGl2ZWx5LlxuICogQHBhcmFtIGFCaWFzIEVpdGhlciAnYmluYXJ5U2VhcmNoLkdSRUFURVNUX0xPV0VSX0JPVU5EJyBvclxuICogICAgICdiaW5hcnlTZWFyY2guTEVBU1RfVVBQRVJfQk9VTkQnLiBTcGVjaWZpZXMgd2hldGhlciB0byByZXR1cm4gdGhlXG4gKiAgICAgY2xvc2VzdCBlbGVtZW50IHRoYXQgaXMgc21hbGxlciB0aGFuIG9yIGdyZWF0ZXIgdGhhbiB0aGUgb25lIHdlIGFyZVxuICogICAgIHNlYXJjaGluZyBmb3IsIHJlc3BlY3RpdmVseSwgaWYgdGhlIGV4YWN0IGVsZW1lbnQgY2Fubm90IGJlIGZvdW5kLlxuICogICAgIERlZmF1bHRzIHRvICdiaW5hcnlTZWFyY2guR1JFQVRFU1RfTE9XRVJfQk9VTkQnLlxuICovXG5leHBvcnRzLnNlYXJjaCA9IGZ1bmN0aW9uIHNlYXJjaChhTmVlZGxlLCBhSGF5c3RhY2ssIGFDb21wYXJlLCBhQmlhcykge1xuICBpZiAoYUhheXN0YWNrLmxlbmd0aCA9PT0gMCkge1xuICAgIHJldHVybiAtMTtcbiAgfVxuXG4gIHZhciBpbmRleCA9IHJlY3Vyc2l2ZVNlYXJjaCgtMSwgYUhheXN0YWNrLmxlbmd0aCwgYU5lZWRsZSwgYUhheXN0YWNrLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYUNvbXBhcmUsIGFCaWFzIHx8IGV4cG9ydHMuR1JFQVRFU1RfTE9XRVJfQk9VTkQpO1xuICBpZiAoaW5kZXggPCAwKSB7XG4gICAgcmV0dXJuIC0xO1xuICB9XG5cbiAgLy8gV2UgaGF2ZSBmb3VuZCBlaXRoZXIgdGhlIGV4YWN0IGVsZW1lbnQsIG9yIHRoZSBuZXh0LWNsb3Nlc3QgZWxlbWVudCB0aGFuXG4gIC8vIHRoZSBvbmUgd2UgYXJlIHNlYXJjaGluZyBmb3IuIEhvd2V2ZXIsIHRoZXJlIG1heSBiZSBtb3JlIHRoYW4gb25lIHN1Y2hcbiAgLy8gZWxlbWVudC4gTWFrZSBzdXJlIHdlIGFsd2F5cyByZXR1cm4gdGhlIHNtYWxsZXN0IG9mIHRoZXNlLlxuICB3aGlsZSAoaW5kZXggLSAxID49IDApIHtcbiAgICBpZiAoYUNvbXBhcmUoYUhheXN0YWNrW2luZGV4XSwgYUhheXN0YWNrW2luZGV4IC0gMV0sIHRydWUpICE9PSAwKSB7XG4gICAgICBicmVhaztcbiAgICB9XG4gICAgLS1pbmRleDtcbiAgfVxuXG4gIHJldHVybiBpbmRleDtcbn07XG4iXSwibWFwcGluZ3MiOiJBQUFBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQUEsT0FBTyxDQUFDQyxvQkFBb0IsR0FBRyxDQUFDO0FBQ2hDRCxPQUFPLENBQUNFLGlCQUFpQixHQUFHLENBQUM7O0FBRTdCO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0EsU0FBU0MsZUFBZUEsQ0FBQ0MsSUFBSSxFQUFFQyxLQUFLLEVBQUVDLE9BQU8sRUFBRUMsU0FBUyxFQUFFQyxRQUFRLEVBQUVDLEtBQUssRUFBRTtFQUN6RTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQSxJQUFJQyxHQUFHLEdBQUdDLElBQUksQ0FBQ0MsS0FBSyxDQUFDLENBQUNQLEtBQUssR0FBR0QsSUFBSSxJQUFJLENBQUMsQ0FBQyxHQUFHQSxJQUFJO0VBQy9DLElBQUlTLEdBQUcsR0FBR0wsUUFBUSxDQUFDRixPQUFPLEVBQUVDLFNBQVMsQ0FBQ0csR0FBRyxDQUFDLEVBQUUsSUFBSSxDQUFDO0VBQ2pELElBQUlHLEdBQUcsS0FBSyxDQUFDLEVBQUU7SUFDYjtJQUNBLE9BQU9ILEdBQUc7RUFDWixDQUFDLE1BQ0ksSUFBSUcsR0FBRyxHQUFHLENBQUMsRUFBRTtJQUNoQjtJQUNBLElBQUlSLEtBQUssR0FBR0ssR0FBRyxHQUFHLENBQUMsRUFBRTtNQUNuQjtNQUNBLE9BQU9QLGVBQWUsQ0FBQ08sR0FBRyxFQUFFTCxLQUFLLEVBQUVDLE9BQU8sRUFBRUMsU0FBUyxFQUFFQyxRQUFRLEVBQUVDLEtBQUssQ0FBQztJQUN6RTs7SUFFQTtJQUNBO0lBQ0EsSUFBSUEsS0FBSyxJQUFJVCxPQUFPLENBQUNFLGlCQUFpQixFQUFFO01BQ3RDLE9BQU9HLEtBQUssR0FBR0UsU0FBUyxDQUFDTyxNQUFNLEdBQUdULEtBQUssR0FBRyxDQUFDLENBQUM7SUFDOUMsQ0FBQyxNQUFNO01BQ0wsT0FBT0ssR0FBRztJQUNaO0VBQ0YsQ0FBQyxNQUNJO0lBQ0g7SUFDQSxJQUFJQSxHQUFHLEdBQUdOLElBQUksR0FBRyxDQUFDLEVBQUU7TUFDbEI7TUFDQSxPQUFPRCxlQUFlLENBQUNDLElBQUksRUFBRU0sR0FBRyxFQUFFSixPQUFPLEVBQUVDLFNBQVMsRUFBRUMsUUFBUSxFQUFFQyxLQUFLLENBQUM7SUFDeEU7O0lBRUE7SUFDQSxJQUFJQSxLQUFLLElBQUlULE9BQU8sQ0FBQ0UsaUJBQWlCLEVBQUU7TUFDdEMsT0FBT1EsR0FBRztJQUNaLENBQUMsTUFBTTtNQUNMLE9BQU9OLElBQUksR0FBRyxDQUFDLEdBQUcsQ0FBQyxDQUFDLEdBQUdBLElBQUk7SUFDN0I7RUFDRjtBQUNGOztBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBSixPQUFPLENBQUNlLE1BQU0sR0FBRyxTQUFTQSxNQUFNQSxDQUFDVCxPQUFPLEVBQUVDLFNBQVMsRUFBRUMsUUFBUSxFQUFFQyxLQUFLLEVBQUU7RUFDcEUsSUFBSUYsU0FBUyxDQUFDTyxNQUFNLEtBQUssQ0FBQyxFQUFFO0lBQzFCLE9BQU8sQ0FBQyxDQUFDO0VBQ1g7RUFFQSxJQUFJRSxLQUFLLEdBQUdiLGVBQWUsQ0FBQyxDQUFDLENBQUMsRUFBRUksU0FBUyxDQUFDTyxNQUFNLEVBQUVSLE9BQU8sRUFBRUMsU0FBUyxFQUN4Q0MsUUFBUSxFQUFFQyxLQUFLLElBQUlULE9BQU8sQ0FBQ0Msb0JBQW9CLENBQUM7RUFDNUUsSUFBSWUsS0FBSyxHQUFHLENBQUMsRUFBRTtJQUNiLE9BQU8sQ0FBQyxDQUFDO0VBQ1g7O0VBRUE7RUFDQTtFQUNBO0VBQ0EsT0FBT0EsS0FBSyxHQUFHLENBQUMsSUFBSSxDQUFDLEVBQUU7SUFDckIsSUFBSVIsUUFBUSxDQUFDRCxTQUFTLENBQUNTLEtBQUssQ0FBQyxFQUFFVCxTQUFTLENBQUNTLEtBQUssR0FBRyxDQUFDLENBQUMsRUFBRSxJQUFJLENBQUMsS0FBSyxDQUFDLEVBQUU7TUFDaEU7SUFDRjtJQUNBLEVBQUVBLEtBQUs7RUFDVDtFQUVBLE9BQU9BLEtBQUs7QUFDZCxDQUFDIiwiaWdub3JlTGlzdCI6W119

@@ -1,0 +1,1 @@
+{"version":3,"names":["isPromise","value","then","exports"],"sources":["../../src/util/promise-utils.ts"],"sourcesContent":[null],"mappings":";;;;;;AAAA;;;;AAIO,MAAMA,SAAS,GAAIC,KAAK,IAAa;EAC1C,IAAIA,KAAK,KAAK,IAAI,IAAI,OAAOA,KAAK,KAAK,QAAQ,EAAE;IAC/C,OAAOA,KAAK,IAAI,OAAOA,KAAK,CAACC,IAAI,KAAK,UAAU;;EAElD,OAAO,KAAK;AACd,CAAC;AALYC,OAAA,CAAAH,SAAS,GAAAA,SAAA","ignoreList":[]}

@@ -1,0 +1,226 @@
+6877828c46f1a6cfc25d10a75528081d
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.translate = void 0;
+const tslib_1 = require("tslib");
+const react_1 = tslib_1.__importStar(require("react"));
+const get_1 = tslib_1.__importDefault(require("lodash/get"));
+const sanitize_html_1 = tslib_1.__importDefault(require("sanitize-html"));
+const translator_context_1 = tslib_1.__importDefault(require("./translator-context"));
+const REACT_ELEMENT = Symbol.for('react.element');
+const isFlattenable = value => {
+  const type = typeof value;
+  return type === 'string' || type === 'number';
+};
+const flatten = array => {
+  if (array.every(isFlattenable)) {
+    return array.join('');
+  }
+  return array;
+};
+const toTemplate = string => {
+  const expressionRe = /{{\s?\w+\s?}}/g;
+  const match = string.match(expressionRe) || [];
+  return [string.split(expressionRe), ...match];
+};
+const normalizeValue = (value, key) => {
+  if (value == null || ['boolean', 'string', 'number'].includes(typeof value)) {
+    return value;
+  }
+  if (value.$$typeof === REACT_ELEMENT) {
+    return react_1.default.cloneElement(value, {
+      key
+    });
+  }
+};
+const isNullOrUndefined = value => value === null || value === undefined;
+/**
+ * Adapted from https://github.com/bloodyowl/react-translate
+ * licenced under The MIT License (MIT) Copyright (c) 2014 Matthias Le Brun
+ */
+const render = (string, values) => {
+  if (!values || !string) return string;
+  const [parts, ...expressions] = toTemplate(string);
+  return flatten(parts.reduce((acc, item, index, array) => {
+    if (index === array.length - 1) {
+      return [...acc, item];
+    }
+    const match = expressions[index] && expressions[index].match(/{{\s?(\w+)\s?}}/);
+    const value = match != null ? values[match[1]] : null;
+    return [...acc, item, normalizeValue(value, index)];
+  }, []));
+};
+/**
+ * Fill the variable allPaths with all possible paths for a given paths
+ * @param paths: inits with the classic paths and changes value in the recursive method
+ *    ex: ['foo', 'bar1', 'bar2', 'bar3']
+ * @param start: helps to store paths
+ *    ex: []
+ * @param firstCall: uses to detect the first call to this recursive function
+ *    ex: true
+ * @param originPaths: references the first value of the variable paths
+ *    ex: ['foo', 'bar1', 'bar2', 'bar3']
+ * @param allPaths: stores all the possibles paths
+ *    ex: [] => ... => [ ['foo', 'bar1', 'bar2', 'bar3'], ['foo.bar1', 'bar2', 'bar3']], ['foo.bar1.bar2', 'bar3'], ... ]
+ */
+const searchAllPaths = (paths, start, firstCall, originPaths, allPaths) => {
+  if (firstCall || paths.length < originPaths.length) {
+    const clonePaths = Array.from(paths);
+    let acc = '';
+    for (let i = 0; i < paths.length; ++i) {
+      acc === '' ? acc = paths[i] : acc += `.${paths[i]}`;
+      clonePaths.shift();
+      allPaths.push(start.concat([acc]).concat(clonePaths));
+      searchAllPaths(clonePaths, start.concat([acc]), false, originPaths, allPaths);
+    }
+  }
+};
+/**
+ * A dirty find to split non standard keys and find data from json
+ * @param obj json object
+ * @param path path to find
+ */
+const deepFindDirty = (obj, path) => {
+  const paths = path.split('.');
+  let current = obj;
+  let trad = undefined;
+  const HASHTAG = '#';
+  const allPaths = [];
+  const allPathsWithoutDuplicate = [];
+  const originPaths = paths;
+  // Fill allPaths possibles
+  searchAllPaths(paths, [], true, originPaths, allPaths);
+  const setAllPaths = new Set(allPaths.map(p => {
+    return p.join(HASHTAG);
+  }));
+  // Delete duplicates
+  setAllPaths.forEach((v1, v2, values) => {
+    return allPathsWithoutDuplicate.push(v2.split(HASHTAG));
+  });
+  // Test all possibles paths while traduction is not found
+  for (let j = 0; j < allPathsWithoutDuplicate.length; ++j) {
+    if (trad === undefined) {
+      // Test a path
+      for (let i = 0; i < allPaths[j].length; ++i) {
+        if (current[allPaths[j][i]] === undefined) {
+          current = undefined;
+          break;
+        }
+        current = current[allPaths[j][i]];
+      }
+      if (current !== undefined) {
+        // Traduction found
+        trad = current;
+        break;
+      }
+    }
+    // Search with an other path
+    current = obj;
+  }
+  return trad;
+};
+const showMissingOrDefault = (key, children) => {
+  const renderInnerTextForMissingKeys = translator_context_1.default.context.renderInnerTextForMissingKeys;
+  if (renderInnerTextForMissingKeys && children && ['string', 'object'].includes(typeof children)) {
+    return children;
+  }
+  return `${translator_context_1.default.context.missingTranslationMsg}[${key}]`;
+};
+const doTranslate = (key, interpolate, children) => {
+  const translationData = translator_context_1.default.context.translations;
+  const currentLocale = translator_context_1.default.context.locale || translator_context_1.default.context.defaultLocale;
+  const data = translationData[currentLocale];
+  // If there is no translation data, it means it hasn’t loaded yet, so return no content
+  if (!Object.keys(translationData).length) {
+    return {
+      content: null
+    };
+  }
+  const preRender = data ? (0, get_1.default)(data, key) || deepFindDirty(data, key) : null;
+  const renderedValue = render(preRender, interpolate);
+  const preSanitize = !isNullOrUndefined(renderedValue) ? renderedValue : showMissingOrDefault(key, children);
+  if (preSanitize === false || /<[a-z][\s\S]*>/i.test(preSanitize)) {
+    // String contains HTML tags. Allow only a super restricted set of tags and attributes
+    const preSanitizeArray = Array.isArray(preSanitize) ? preSanitize : [preSanitize];
+    const content = preSanitizeArray.map(part => part.$$typeof === REACT_ELEMENT ? part : (0, sanitize_html_1.default)(part, {
+      allowedTags: ['b', 'i', 'em', 'strong', 'a', 'br', 'hr'],
+      allowedAttributes: {
+        a: ['href', 'target']
+      }
+    }));
+    return {
+      content,
+      html: true
+    };
+  }
+  return {
+    content: preSanitize,
+    html: false
+  };
+};
+/**
+ * Translates the given key using provided i18n values
+ */
+class Translate extends react_1.default.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      lastChange: null
+    };
+  }
+  componentDidUpdate() {
+    this.setState({
+      lastChange: translator_context_1.default.context.lastChange
+    });
+  }
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextState.lastChange !== translator_context_1.default.context.lastChange || nextProps.interpolate !== this.props.interpolate;
+  }
+  render() {
+    const {
+      contentKey,
+      interpolate,
+      component,
+      children
+    } = this.props;
+    const processed = doTranslate(contentKey, interpolate, children);
+    if (processed.html) {
+      const contentArray = Array.isArray(processed.content) ? processed.content : [processed.content];
+      return contentArray.map((content, i) => content.$$typeof === REACT_ELEMENT ? Object.assign(Object.assign({}, content), {
+        key: i
+      }) : react_1.default.createElement(component, {
+        key: i,
+        dangerouslySetInnerHTML: {
+          __html: content
+        }
+      }));
+    }
+    return react_1.default.createElement(component, null, processed.content);
+  }
+}
+Translate.defaultProps = {
+  component: 'span'
+};
+const translate = (contentKey, interpolate, children) => {
+  const translation = doTranslate(contentKey, interpolate, children);
+  if (translation.html) {
+    const contentArray = Array.isArray(translation.content) ? translation.content : [translation.content];
+    const processedContent = contentArray.map((content, i) => content.$$typeof === REACT_ELEMENT ? Object.assign(Object.assign({}, content), {
+      key: i
+    }) : react_1.default.createElement('span', {
+      key: i,
+      dangerouslySetInnerHTML: {
+        __html: content
+      }
+    }));
+    return processedContent.length === 1 ? processedContent[0] : react_1.default.createElement(react_1.Fragment, null, processedContent);
+  } else {
+    return translation.content;
+  }
+};
+exports.translate = translate;
+exports.default = Translate;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJyZWFjdF8xIiwidHNsaWJfMSIsIl9faW1wb3J0U3RhciIsInJlcXVpcmUiLCJnZXRfMSIsIl9faW1wb3J0RGVmYXVsdCIsInNhbml0aXplX2h0bWxfMSIsInRyYW5zbGF0b3JfY29udGV4dF8xIiwiUkVBQ1RfRUxFTUVOVCIsIlN5bWJvbCIsImZvciIsImlzRmxhdHRlbmFibGUiLCJ2YWx1ZSIsInR5cGUiLCJmbGF0dGVuIiwiYXJyYXkiLCJldmVyeSIsImpvaW4iLCJ0b1RlbXBsYXRlIiwic3RyaW5nIiwiZXhwcmVzc2lvblJlIiwibWF0Y2giLCJzcGxpdCIsIm5vcm1hbGl6ZVZhbHVlIiwia2V5IiwiaW5jbHVkZXMiLCIkJHR5cGVvZiIsImRlZmF1bHQiLCJjbG9uZUVsZW1lbnQiLCJpc051bGxPclVuZGVmaW5lZCIsInVuZGVmaW5lZCIsInJlbmRlciIsInZhbHVlcyIsInBhcnRzIiwiZXhwcmVzc2lvbnMiLCJyZWR1Y2UiLCJhY2MiLCJpdGVtIiwiaW5kZXgiLCJsZW5ndGgiLCJzZWFyY2hBbGxQYXRocyIsInBhdGhzIiwic3RhcnQiLCJmaXJzdENhbGwiLCJvcmlnaW5QYXRocyIsImFsbFBhdGhzIiwiY2xvbmVQYXRocyIsIkFycmF5IiwiZnJvbSIsImkiLCJzaGlmdCIsInB1c2giLCJjb25jYXQiLCJkZWVwRmluZERpcnR5Iiwib2JqIiwicGF0aCIsImN1cnJlbnQiLCJ0cmFkIiwiSEFTSFRBRyIsImFsbFBhdGhzV2l0aG91dER1cGxpY2F0ZSIsInNldEFsbFBhdGhzIiwiU2V0IiwibWFwIiwicCIsImZvckVhY2giLCJ2MSIsInYyIiwiaiIsInNob3dNaXNzaW5nT3JEZWZhdWx0IiwiY2hpbGRyZW4iLCJyZW5kZXJJbm5lclRleHRGb3JNaXNzaW5nS2V5cyIsImNvbnRleHQiLCJtaXNzaW5nVHJhbnNsYXRpb25Nc2ciLCJkb1RyYW5zbGF0ZSIsImludGVycG9sYXRlIiwidHJhbnNsYXRpb25EYXRhIiwidHJhbnNsYXRpb25zIiwiY3VycmVudExvY2FsZSIsImxvY2FsZSIsImRlZmF1bHRMb2NhbGUiLCJkYXRhIiwiT2JqZWN0Iiwia2V5cyIsImNvbnRlbnQiLCJwcmVSZW5kZXIiLCJyZW5kZXJlZFZhbHVlIiwicHJlU2FuaXRpemUiLCJ0ZXN0IiwicHJlU2FuaXRpemVBcnJheSIsImlzQXJyYXkiLCJwYXJ0IiwiYWxsb3dlZFRhZ3MiLCJhbGxvd2VkQXR0cmlidXRlcyIsImEiLCJodG1sIiwiVHJhbnNsYXRlIiwiQ29tcG9uZW50IiwiY29uc3RydWN0b3IiLCJwcm9wcyIsInN0YXRlIiwibGFzdENoYW5nZSIsImNvbXBvbmVudERpZFVwZGF0ZSIsInNldFN0YXRlIiwic2hvdWxkQ29tcG9uZW50VXBkYXRlIiwibmV4dFByb3BzIiwibmV4dFN0YXRlIiwiY29udGVudEtleSIsImNvbXBvbmVudCIsInByb2Nlc3NlZCIsImNvbnRlbnRBcnJheSIsImFzc2lnbiIsImNyZWF0ZUVsZW1lbnQiLCJkYW5nZXJvdXNseVNldElubmVySFRNTCIsIl9faHRtbCIsImRlZmF1bHRQcm9wcyIsInRyYW5zbGF0ZSIsInRyYW5zbGF0aW9uIiwicHJvY2Vzc2VkQ29udGVudCIsIkZyYWdtZW50IiwiZXhwb3J0cyJdLCJzb3VyY2VzIjpbIi4uLy4uL3NyYy9sYW5ndWFnZS90cmFuc2xhdGUudHN4Il0sInNvdXJjZXNDb250ZW50IjpbbnVsbF0sIm1hcHBpbmdzIjoiOzs7Ozs7O0FBQUEsTUFBQUEsT0FBQSxHQUFBQyxPQUFBLENBQUFDLFlBQUEsQ0FBQUMsT0FBQTtBQUNBLE1BQUFDLEtBQUEsR0FBQUgsT0FBQSxDQUFBSSxlQUFBLENBQUFGLE9BQUE7QUFDQSxNQUFBRyxlQUFBLEdBQUFMLE9BQUEsQ0FBQUksZUFBQSxDQUFBRixPQUFBO0FBQ0EsTUFBQUksb0JBQUEsR0FBQU4sT0FBQSxDQUFBSSxlQUFBLENBQUFGLE9BQUE7QUFTQSxNQUFNSyxhQUFhLEdBQUdDLE1BQU0sQ0FBQ0MsR0FBRyxDQUFDLGVBQWUsQ0FBQztBQUVqRCxNQUFNQyxhQUFhLEdBQUdDLEtBQUss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
