@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: magic-vente-stock-backend
+    env: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      - key: JHIPSTER_SLEEP
+        value: 30
+    healthCheckPath: /management/health
+    autoDeploy: true
