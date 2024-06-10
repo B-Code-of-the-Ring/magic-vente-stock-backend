@@ -16,7 +16,7 @@ WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
 
 # Exposer le port sur lequel l'application écoute (par défaut 8080 pour JHipster)
-EXPOSE 8080s
+EXPOSE 8080
 
 # Exécuter l'application
 CMD ["java", "-jar", "/app/app.jar"]
