@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: magic-vente-stock-backend
+    name: mmagicventestock
     env: docker
     dockerfilePath: ./Dockerfile
     plan: free
