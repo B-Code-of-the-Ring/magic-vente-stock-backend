@@ -1,14 +1,31 @@
-FROM ubuntu:latest AS build
-RUN apt-get update
-RUN apt-get install openjdk-17-jdk -y
+FROM maven:3.8.6-eclipse-temurin-17-alpine AS build
 
-WORKDIR /usr/src/app
+# Installer Node.js et npm
+RUN apk add --update nodejs npm
 
+# Définir le répertoire de travail
+WORKDIR /app
+
+# Copier les fichiers de configuration Maven et le code source
 COPY . .
-# Créez un package de production avec Maven
+
+# Donner les permissions d'exécution au wrapper Maven
+RUN chmod +x mvnw
+
+# Télécharger les dépendances et construire l'application avec le profil production
 RUN ./mvnw -Pprod clean verify
 
-# Exposez le port sur lequel votre application s'exécute
+# Étape 2 : Créer l'image pour exécuter l'application
+FROM openjdk:17-jdk-slim
+
+# Définir le répertoire de travail
+WORKDIR /app
+
+# Copier le JAR construit depuis l'étape précédente
+COPY --from=build /app/target/*.jar app.jar
+
+# Exposer le port sur lequel l'application écoute (par défaut 8080 pour JHipster)
 EXPOSE 8080
 
-CMD ["java", "-jar", "target/*.jar"]
+# Exécuter l'application
+CMD ["java", "-jar", "/app/app.jar"]
