@@ -2,4 +2,13 @@ FROM ubuntu:latest AS build
 RUN apt-get update
 RUN apt-get install openjdk-17-jdk -y
 
+WORKDIR /usr/src/app
+
 COPY . .
+# Créez un package de production avec Maven
+RUN ./mvnw -Pprod clean verify
+
+# Exposez le port sur lequel votre application s'exécute
+EXPOSE 8080
+
+CMD ["java", "-jar", "target/*.jar"]
