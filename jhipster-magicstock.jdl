@@ -1,0 +1,21 @@
+entity Produit {
+    libelleProduit String required maxlength(200),
+    prixProduit BigDecimal,
+    quantiteProduit Integer,
+    imageProduit TextBlob,
+}
+
+entity ProduitJour {
+    dateDebut LocalDate,
+    dateFin LocalDate,
+}
+
+relationship OneToMany {
+    Produit{produitJour} to ProduitJour
+}
+
+paginate Produit, ProduitJour with pagination
+
+dto * with mapstruct
+
+service all with serviceImpl
