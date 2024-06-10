@@ -959,9 +959,9 @@
                 <profile.test>testprod</profile.test>
                 <liquibase-plugin.hibernate-dialect>org.hibernate.dialect.PostgreSQLDialect</liquibase-plugin.hibernate-dialect>
                 <liquibase-plugin.driver>org.postgresql.Driver</liquibase-plugin.driver>
-                <liquibase-plugin.url>jdbc:postgresql://localhost:5432/magicventestock</liquibase-plugin.url>
-                <liquibase-plugin.username>magicventestock</liquibase-plugin.username>
-                <liquibase-plugin.password/>
+                <liquibase-plugin.url>jdbc:postgresql://pg-c87e60c-project-288f.f.aivencloud.com:21284/defaultdb?sslmode=require</liquibase-plugin.url>
+                <liquibase-plugin.username>avnadmin</liquibase-plugin.username>
+                <liquibase-plugin.password>AVNS_mUdfKr72UkslzfKWaFJ</liquibase-plugin.password>
             </properties>
             <build>
                 <plugins>

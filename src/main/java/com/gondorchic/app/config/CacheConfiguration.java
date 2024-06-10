@@ -50,6 +50,9 @@ public class CacheConfiguration {
             createCache(cm, com.gondorchic.app.domain.User.class.getName());
             createCache(cm, com.gondorchic.app.domain.Authority.class.getName());
             createCache(cm, com.gondorchic.app.domain.User.class.getName() + ".authorities");
+            createCache(cm, com.gondorchic.app.domain.Produit.class.getName());
+            createCache(cm, com.gondorchic.app.domain.Produit.class.getName() + ".produitJours");
+            createCache(cm, com.gondorchic.app.domain.ProduitJour.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }
