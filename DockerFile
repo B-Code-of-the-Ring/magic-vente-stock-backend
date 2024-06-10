@@ -1,19 +1,10 @@
 FROM maven:3.8.6-eclipse-temurin-17-alpine AS build
 
-# Installer Node.js et npm
-RUN apk add --update nodejs npm
-
-# Définir le répertoire de travail
-WORKDIR /app
-
 # Copier les fichiers de configuration Maven et le code source
 COPY . .
 
-# Donner les permissions d'exécution au wrapper Maven
-RUN chmod +x mvnw
-
 # Télécharger les dépendances et construire l'application avec le profil production
-RUN ./mvnw -Pprod clean verify
+RUN mvn -Pprod clean verify
 
 # Étape 2 : Créer l'image pour exécuter l'application
 FROM openjdk:17-jdk-slim
@@ -25,7 +16,7 @@ WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
 
 # Exposer le port sur lequel l'application écoute (par défaut 8080 pour JHipster)
-EXPOSE 8080
+EXPOSE 8080s
 
 # Exécuter l'application
 CMD ["java", "-jar", "/app/app.jar"]
