@@ -18,8 +18,13 @@ public class ProduitDTO implements Serializable {
     @Size(max = 200)
     private String libelleProduit;
 
+    @NotNull
+    @DecimalMin(value = "0")
+    @DecimalMax(value = "99999999999999999999.99")
     private BigDecimal prixProduit;
 
+    @NotNull
+    @Min(value = 0)
     private Integer quantiteProduit;
 
     @Lob

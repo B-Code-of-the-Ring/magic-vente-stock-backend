@@ -13,11 +13,16 @@
     },
     {
       "fieldName": "prixProduit",
-      "fieldType": "BigDecimal"
+      "fieldType": "BigDecimal",
+      "fieldValidateRules": ["required", "min", "max"],
+      "fieldValidateRulesMax": "99999999999999999999.99",
+      "fieldValidateRulesMin": "0"
     },
     {
       "fieldName": "quantiteProduit",
-      "fieldType": "Integer"
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required", "min"],
+      "fieldValidateRulesMin": "0"
     },
     {
       "fieldName": "imageProduit",
@@ -31,7 +36,7 @@
     {
       "otherEntityName": "produitJour",
       "relationshipName": "produitJour",
-      "relationshipSide": "left",
+      "relationshipSide": "right",
       "relationshipType": "one-to-many"
     }
   ],

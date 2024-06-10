@@ -32,10 +32,15 @@ public class Produit implements Serializable {
     @Column(name = "libelle_produit", length = 200, nullable = false)
     private String libelleProduit;
 
-    @Column(name = "prix_produit", precision = 21, scale = 2)
+    @NotNull
+    @DecimalMin(value = "0")
+    @DecimalMax(value = "99999999999999999999.99")
+    @Column(name = "prix_produit", precision = 21, scale = 2, nullable = false)
     private BigDecimal prixProduit;
 
-    @Column(name = "quantite_produit")
+    @NotNull
+    @Min(value = 0)
+    @Column(name = "quantite_produit", nullable = false)
     private Integer quantiteProduit;
 
     @Lob

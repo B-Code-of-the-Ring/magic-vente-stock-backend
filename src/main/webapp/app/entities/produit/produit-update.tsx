@@ -100,13 +100,30 @@ export const ProduitUpdate = () => {
                   maxLength: { value: 200, message: 'Ce champ doit faire moins de 200 caractères.' },
                 }}
               />
-              <ValidatedField label="Prix Produit" id="produit-prixProduit" name="prixProduit" data-cy="prixProduit" type="text" />
+              <ValidatedField
+                label="Prix Produit"
+                id="produit-prixProduit"
+                name="prixProduit"
+                data-cy="prixProduit"
+                type="text"
+                validate={{
+                  required: { value: true, message: 'Ce champ est obligatoire.' },
+                  min: { value: 0, message: 'Ce champ doit être supérieur à 0.' },
+                  max: { value: 99999999999999999999.99, message: 'Ce champ doit être inférieur à {99999999999999999999.99}.' },
+                  validate: v => isNumber(v) || 'Ce champ doit être un nombre.',
+                }}
+              />
               <ValidatedField
                 label="Quantite Produit"
                 id="produit-quantiteProduit"
                 name="quantiteProduit"
                 data-cy="quantiteProduit"
                 type="text"
+                validate={{
+                  required: { value: true, message: 'Ce champ est obligatoire.' },
+                  min: { value: 0, message: 'Ce champ doit être supérieur à 0.' },
+                  validate: v => isNumber(v) || 'Ce champ doit être un nombre.',
+                }}
               />
               <ValidatedField label="Image Produit" id="produit-imageProduit" name="imageProduit" data-cy="imageProduit" type="textarea" />
               <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/produit" replace color="info">

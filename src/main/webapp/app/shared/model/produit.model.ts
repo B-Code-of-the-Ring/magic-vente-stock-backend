@@ -1,8 +1,8 @@
 export interface IProduit {
   id?: number;
   libelleProduit?: string;
-  prixProduit?: number | null;
-  quantiteProduit?: number | null;
+  prixProduit?: number;
+  quantiteProduit?: number;
   imageProduit?: string | null;
 }
 

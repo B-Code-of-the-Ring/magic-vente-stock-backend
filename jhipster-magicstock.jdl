@@ -1,17 +1,16 @@
 entity Produit {
     libelleProduit String required maxlength(200),
-    prixProduit BigDecimal,
-    quantiteProduit Integer,
-    imageProduit TextBlob,
+    prixProduit BigDecimal required min(0) max(99999999999999999999.99),
+    quantiteProduit Integer required min(0),
+    imageProduit TextBlob
 }
 
 entity ProduitJour {
     dateDebut LocalDate,
-    dateFin LocalDate,
+    dateFin LocalDate
 }
-
-relationship OneToMany {
-    Produit{produitJour} to ProduitJour
+relationship ManyToOne{
+   ProduitJour to Produit{produitJour}
 }
 
 paginate Produit, ProduitJour with pagination

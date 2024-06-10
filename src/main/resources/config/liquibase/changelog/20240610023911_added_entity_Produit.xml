@@ -18,10 +18,10 @@
                 <constraints nullable="false" />
             </column>
             <column name="prix_produit" type="decimal(21,2)">
-                <constraints nullable="true" />
+                <constraints nullable="false" />
             </column>
             <column name="quantite_produit" type="integer">
-                <constraints nullable="true" />
+                <constraints nullable="false" />
             </column>
             <column name="image_produit" type="${clobType}">
                 <constraints nullable="true" />

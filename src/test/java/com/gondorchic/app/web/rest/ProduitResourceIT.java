@@ -39,11 +39,11 @@ class ProduitResourceIT {
     private static final String DEFAULT_LIBELLE_PRODUIT = "AAAAAAAAAA";
     private static final String UPDATED_LIBELLE_PRODUIT = "BBBBBBBBBB";
 
-    private static final BigDecimal DEFAULT_PRIX_PRODUIT = new BigDecimal(1);
-    private static final BigDecimal UPDATED_PRIX_PRODUIT = new BigDecimal(2);
+    private static final BigDecimal DEFAULT_PRIX_PRODUIT = new BigDecimal(0);
+    private static final BigDecimal UPDATED_PRIX_PRODUIT = new BigDecimal(1);
 
-    private static final Integer DEFAULT_QUANTITE_PRODUIT = 1;
-    private static final Integer UPDATED_QUANTITE_PRODUIT = 2;
+    private static final Integer DEFAULT_QUANTITE_PRODUIT = 0;
+    private static final Integer UPDATED_QUANTITE_PRODUIT = 1;
 
     private static final String DEFAULT_IMAGE_PRODUIT = "AAAAAAAAAA";
     private static final String UPDATED_IMAGE_PRODUIT = "BBBBBBBBBB";
@@ -164,6 +164,40 @@ class ProduitResourceIT {
         long databaseSizeBeforeTest = getRepositoryCount();
         // set the field null
         produit.setLibelleProduit(null);
+
+        // Create the Produit, which fails.
+        ProduitDTO produitDTO = produitMapper.toDto(produit);
+
+        restProduitMockMvc
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(produitDTO)))
+            .andExpect(status().isBadRequest());
+
+        assertSameRepositoryCount(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    void checkPrixProduitIsRequired() throws Exception {
+        long databaseSizeBeforeTest = getRepositoryCount();
+        // set the field null
+        produit.setPrixProduit(null);
+
+        // Create the Produit, which fails.
+        ProduitDTO produitDTO = produitMapper.toDto(produit);
+
+        restProduitMockMvc
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(produitDTO)))
+            .andExpect(status().isBadRequest());
+
+        assertSameRepositoryCount(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    void checkQuantiteProduitIsRequired() throws Exception {
+        long databaseSizeBeforeTest = getRepositoryCount();
+        // set the field null
+        produit.setQuantiteProduit(null);
 
         // Create the Produit, which fails.
         ProduitDTO produitDTO = produitMapper.toDto(produit);
