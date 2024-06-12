@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Button, Row, Col, FormText } from 'reactstrap';
-import { isNumber, ValidatedField, ValidatedForm } from 'react-jhipster';
+import { isNumber, ValidatedField, ValidatedForm, ValidatedBlobField } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
@@ -125,7 +125,14 @@ export const ProduitUpdate = () => {
                   validate: v => isNumber(v) || 'Ce champ doit être un nombre.',
                 }}
               />
-              <ValidatedField label="Image Produit" id="produit-imageProduit" name="imageProduit" data-cy="imageProduit" type="textarea" />
+              <ValidatedBlobField
+                label="Image Produit"
+                id="produit-imageProduit"
+                name="imageProduit"
+                data-cy="imageProduit"
+                isImage
+                accept="image/*"
+              />
               <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/produit" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;

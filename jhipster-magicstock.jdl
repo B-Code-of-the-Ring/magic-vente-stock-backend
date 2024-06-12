@@ -2,7 +2,7 @@ entity Produit {
     libelleProduit String required maxlength(200),
     prixProduit BigDecimal required min(0) max(99999999999999999999.99),
     quantiteProduit Integer required min(0),
-    imageProduit TextBlob
+    imageProduit ImageBlob
 }
 
 entity ProduitJour {

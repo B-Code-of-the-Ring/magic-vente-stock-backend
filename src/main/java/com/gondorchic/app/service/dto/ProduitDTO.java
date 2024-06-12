@@ -28,7 +28,9 @@ public class ProduitDTO implements Serializable {
     private Integer quantiteProduit;
 
     @Lob
-    private String imageProduit;
+    private byte[] imageProduit;
+
+    private String imageProduitContentType;
 
     public Long getId() {
         return id;
@@ -62,12 +64,20 @@ public class ProduitDTO implements Serializable {
         this.quantiteProduit = quantiteProduit;
     }
 
-    public String getImageProduit() {
+    public byte[] getImageProduit() {
         return imageProduit;
     }
 
-    public void setImageProduit(String imageProduit) {
+    public void setImageProduit(byte[] imageProduit) {
         this.imageProduit = imageProduit;
+    }
+
+    public String getImageProduitContentType() {
+        return imageProduitContentType;
+    }
+
+    public void setImageProduitContentType(String imageProduitContentType) {
+        this.imageProduitContentType = imageProduitContentType;
     }
 
     @Override

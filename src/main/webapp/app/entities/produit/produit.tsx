@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Button, Table } from 'reactstrap';
-import { byteSize, Translate, getPaginationState, JhiPagination, JhiItemCount } from 'react-jhipster';
+import { openFile, byteSize, Translate, getPaginationState, JhiPagination, JhiItemCount } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSort, faSortUp, faSortDown } from '@fortawesome/free-solid-svg-icons';
 import { ASC, DESC, ITEMS_PER_PAGE, SORT } from 'app/shared/util/pagination.constants';
@@ -137,7 +137,24 @@ export const Produit = () => {
                   <td>{produit.libelleProduit}</td>
                   <td>{produit.prixProduit}</td>
                   <td>{produit.quantiteProduit}</td>
-                  <td>{produit.imageProduit}</td>
+                  <td>
+                    {produit.imageProduit ? (
+                      <div>
+                        {produit.imageProduitContentType ? (
+                          <a onClick={openFile(produit.imageProduitContentType, produit.imageProduit)}>
+                            <img
+                              src={`data:${produit.imageProduitContentType};base64,${produit.imageProduit}`}
+                              style={{ maxHeight: '30px' }}
+                            />
+                            &nbsp;
+                          </a>
+                        ) : null}
+                        <span>
+                          {produit.imageProduitContentType}, {byteSize(produit.imageProduit)}
+                        </span>
+                      </div>
+                    ) : null}
+                  </td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`/produit/${produit.id}`} color="info" size="sm" data-cy="entityDetailsButton">

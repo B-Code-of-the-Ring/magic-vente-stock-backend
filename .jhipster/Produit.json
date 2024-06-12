@@ -27,7 +27,7 @@
     {
       "fieldName": "imageProduit",
       "fieldType": "byte[]",
-      "fieldTypeBlobContent": "text"
+      "fieldTypeBlobContent": "image"
     }
   ],
   "name": "Produit",
