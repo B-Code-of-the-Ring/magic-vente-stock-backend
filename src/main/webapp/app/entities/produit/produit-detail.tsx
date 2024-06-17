@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Button, Row, Col } from 'reactstrap';
-import { byteSize } from 'react-jhipster';
+import { openFile, byteSize } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { useAppDispatch, useAppSelector } from 'app/config/store';
@@ -42,7 +42,23 @@ export const ProduitDetail = () => {
           <dt>
             <span id="imageProduit">Image Produit</span>
           </dt>
-          <dd>{produitEntity.imageProduit}</dd>
+          <dd>
+            {produitEntity.imageProduit ? (
+              <div>
+                {produitEntity.imageProduitContentType ? (
+                  <a onClick={openFile(produitEntity.imageProduitContentType, produitEntity.imageProduit)}>
+                    <img
+                      src={`data:${produitEntity.imageProduitContentType};base64,${produitEntity.imageProduit}`}
+                      style={{ maxHeight: '30px' }}
+                    />
+                  </a>
+                ) : null}
+                <span>
+                  {produitEntity.imageProduitContentType}, {byteSize(produitEntity.imageProduit)}
+                </span>
+              </div>
+            ) : null}
+          </dd>
         </dl>
         <Button tag={Link} to="/produit" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" /> <span className="d-none d-md-inline">Retour</span>

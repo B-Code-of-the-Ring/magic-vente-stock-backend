@@ -23,7 +23,10 @@
             <column name="quantite_produit" type="integer">
                 <constraints nullable="false" />
             </column>
-            <column name="image_produit" type="${clobType}">
+            <column name="image_produit" type="${blobType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="image_produit_content_type" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
@@ -50,7 +53,8 @@
             <column name="libelle_produit" type="string"/>
             <column name="prix_produit" type="numeric"/>
             <column name="quantite_produit" type="numeric"/>
-            <column name="image_produit" type="clob"/>
+            <column name="image_produit" type="blob"/>
+            <column name="image_produit_content_type" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

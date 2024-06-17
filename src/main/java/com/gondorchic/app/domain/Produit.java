@@ -45,7 +45,10 @@ public class Produit implements Serializable {
 
     @Lob
     @Column(name = "image_produit")
-    private String imageProduit;
+    private byte[] imageProduit;
+
+    @Column(name = "image_produit_content_type")
+    private String imageProduitContentType;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "produit")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -106,17 +109,30 @@ public class Produit implements Serializable {
         this.quantiteProduit = quantiteProduit;
     }
 
-    public String getImageProduit() {
+    public byte[] getImageProduit() {
         return this.imageProduit;
     }
 
-    public Produit imageProduit(String imageProduit) {
+    public Produit imageProduit(byte[] imageProduit) {
         this.setImageProduit(imageProduit);
         return this;
     }
 
-    public void setImageProduit(String imageProduit) {
+    public void setImageProduit(byte[] imageProduit) {
         this.imageProduit = imageProduit;
+    }
+
+    public String getImageProduitContentType() {
+        return this.imageProduitContentType;
+    }
+
+    public Produit imageProduitContentType(String imageProduitContentType) {
+        this.imageProduitContentType = imageProduitContentType;
+        return this;
+    }
+
+    public void setImageProduitContentType(String imageProduitContentType) {
+        this.imageProduitContentType = imageProduitContentType;
     }
 
     public Set<ProduitJour> getProduitJours() {
@@ -178,6 +194,7 @@ public class Produit implements Serializable {
             ", prixProduit=" + getPrixProduit() +
             ", quantiteProduit=" + getQuantiteProduit() +
             ", imageProduit='" + getImageProduit() + "'" +
+            ", imageProduitContentType='" + getImageProduitContentType() + "'" +
             "}";
     }
 }

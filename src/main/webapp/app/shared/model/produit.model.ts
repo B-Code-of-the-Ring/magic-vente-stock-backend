@@ -3,6 +3,7 @@ export interface IProduit {
   libelleProduit?: string;
   prixProduit?: number;
   quantiteProduit?: number;
+  imageProduitContentType?: string | null;
   imageProduit?: string | null;
 }
 

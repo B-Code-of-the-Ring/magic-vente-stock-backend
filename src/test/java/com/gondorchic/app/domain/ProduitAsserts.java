@@ -57,7 +57,13 @@ public class ProduitAsserts {
                         .isEqualTo(actual.getPrixProduit())
             )
             .satisfies(e -> assertThat(e.getQuantiteProduit()).as("check quantiteProduit").isEqualTo(actual.getQuantiteProduit()))
-            .satisfies(e -> assertThat(e.getImageProduit()).as("check imageProduit").isEqualTo(actual.getImageProduit()));
+            .satisfies(e -> assertThat(e.getImageProduit()).as("check imageProduit").isEqualTo(actual.getImageProduit()))
+            .satisfies(
+                e ->
+                    assertThat(e.getImageProduitContentType())
+                        .as("check imageProduit contenty type")
+                        .isEqualTo(actual.getImageProduitContentType())
+            );
     }
 
     /**

@@ -16,6 +16,7 @@ import com.gondorchic.app.service.dto.ProduitDTO;
 import com.gondorchic.app.service.mapper.ProduitMapper;
 import jakarta.persistence.EntityManager;
 import java.math.BigDecimal;
+import java.util.Base64;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
 import org.junit.jupiter.api.AfterEach;
@@ -45,8 +46,10 @@ class ProduitResourceIT {
     private static final Integer DEFAULT_QUANTITE_PRODUIT = 0;
     private static final Integer UPDATED_QUANTITE_PRODUIT = 1;
 
-    private static final String DEFAULT_IMAGE_PRODUIT = "AAAAAAAAAA";
-    private static final String UPDATED_IMAGE_PRODUIT = "BBBBBBBBBB";
+    private static final byte[] DEFAULT_IMAGE_PRODUIT = TestUtil.createByteArray(1, "0");
+    private static final byte[] UPDATED_IMAGE_PRODUIT = TestUtil.createByteArray(1, "1");
+    private static final String DEFAULT_IMAGE_PRODUIT_CONTENT_TYPE = "image/jpg";
+    private static final String UPDATED_IMAGE_PRODUIT_CONTENT_TYPE = "image/png";
 
     private static final String ENTITY_API_URL = "/api/produits";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -84,7 +87,8 @@ class ProduitResourceIT {
             .libelleProduit(DEFAULT_LIBELLE_PRODUIT)
             .prixProduit(DEFAULT_PRIX_PRODUIT)
             .quantiteProduit(DEFAULT_QUANTITE_PRODUIT)
-            .imageProduit(DEFAULT_IMAGE_PRODUIT);
+            .imageProduit(DEFAULT_IMAGE_PRODUIT)
+            .imageProduitContentType(DEFAULT_IMAGE_PRODUIT_CONTENT_TYPE);
         return produit;
     }
 
@@ -99,7 +103,8 @@ class ProduitResourceIT {
             .libelleProduit(UPDATED_LIBELLE_PRODUIT)
             .prixProduit(UPDATED_PRIX_PRODUIT)
             .quantiteProduit(UPDATED_QUANTITE_PRODUIT)
-            .imageProduit(UPDATED_IMAGE_PRODUIT);
+            .imageProduit(UPDATED_IMAGE_PRODUIT)
+            .imageProduitContentType(UPDATED_IMAGE_PRODUIT_CONTENT_TYPE);
         return produit;
     }
 
@@ -224,7 +229,8 @@ class ProduitResourceIT {
             .andExpect(jsonPath("$.[*].libelleProduit").value(hasItem(DEFAULT_LIBELLE_PRODUIT)))
             .andExpect(jsonPath("$.[*].prixProduit").value(hasItem(sameNumber(DEFAULT_PRIX_PRODUIT))))
             .andExpect(jsonPath("$.[*].quantiteProduit").value(hasItem(DEFAULT_QUANTITE_PRODUIT)))
-            .andExpect(jsonPath("$.[*].imageProduit").value(hasItem(DEFAULT_IMAGE_PRODUIT.toString())));
+            .andExpect(jsonPath("$.[*].imageProduitContentType").value(hasItem(DEFAULT_IMAGE_PRODUIT_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].imageProduit").value(hasItem(Base64.getEncoder().encodeToString(DEFAULT_IMAGE_PRODUIT))));
     }
 
     @Test
@@ -242,7 +248,8 @@ class ProduitResourceIT {
             .andExpect(jsonPath("$.libelleProduit").value(DEFAULT_LIBELLE_PRODUIT))
             .andExpect(jsonPath("$.prixProduit").value(sameNumber(DEFAULT_PRIX_PRODUIT)))
             .andExpect(jsonPath("$.quantiteProduit").value(DEFAULT_QUANTITE_PRODUIT))
-            .andExpect(jsonPath("$.imageProduit").value(DEFAULT_IMAGE_PRODUIT.toString()));
+            .andExpect(jsonPath("$.imageProduitContentType").value(DEFAULT_IMAGE_PRODUIT_CONTENT_TYPE))
+            .andExpect(jsonPath("$.imageProduit").value(Base64.getEncoder().encodeToString(DEFAULT_IMAGE_PRODUIT)));
     }
 
     @Test
@@ -268,7 +275,8 @@ class ProduitResourceIT {
             .libelleProduit(UPDATED_LIBELLE_PRODUIT)
             .prixProduit(UPDATED_PRIX_PRODUIT)
             .quantiteProduit(UPDATED_QUANTITE_PRODUIT)
-            .imageProduit(UPDATED_IMAGE_PRODUIT);
+            .imageProduit(UPDATED_IMAGE_PRODUIT)
+            .imageProduitContentType(UPDATED_IMAGE_PRODUIT_CONTENT_TYPE);
         ProduitDTO produitDTO = produitMapper.toDto(updatedProduit);
 
         restProduitMockMvc
@@ -354,7 +362,10 @@ class ProduitResourceIT {
         Produit partialUpdatedProduit = new Produit();
         partialUpdatedProduit.setId(produit.getId());
 
-        partialUpdatedProduit.prixProduit(UPDATED_PRIX_PRODUIT).imageProduit(UPDATED_IMAGE_PRODUIT);
+        partialUpdatedProduit
+            .prixProduit(UPDATED_PRIX_PRODUIT)
+            .imageProduit(UPDATED_IMAGE_PRODUIT)
+            .imageProduitContentType(UPDATED_IMAGE_PRODUIT_CONTENT_TYPE);
 
         restProduitMockMvc
             .perform(
@@ -386,7 +397,8 @@ class ProduitResourceIT {
             .libelleProduit(UPDATED_LIBELLE_PRODUIT)
             .prixProduit(UPDATED_PRIX_PRODUIT)
             .quantiteProduit(UPDATED_QUANTITE_PRODUIT)
-            .imageProduit(UPDATED_IMAGE_PRODUIT);
+            .imageProduit(UPDATED_IMAGE_PRODUIT)
+            .imageProduitContentType(UPDATED_IMAGE_PRODUIT_CONTENT_TYPE);
 
         restProduitMockMvc
             .perform(
