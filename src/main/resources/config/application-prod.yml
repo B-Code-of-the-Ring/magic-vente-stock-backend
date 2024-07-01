@@ -115,10 +115,10 @@ jhipster:
       ring-buffer-size: 512
   # CORS configuration
   cors:
-    allowed-origins: "*"
+    allowed-origins: "http://localhost:5173"
     allowed-methods: "*"
     allowed-headers: "*"
-    exposed-headers: "Authorization"
+    exposed-headers: "Authorization,Link,X-Total-Count"
     allow-credentials: true
     max-age: 1800
   # Swagger configuration
