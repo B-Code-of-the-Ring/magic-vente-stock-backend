@@ -84,12 +84,6 @@ server:
 # ===================================================================
 
 jhipster:
-  cors:
-    allowed-origins: "*"
-    allowed-methods: "*"
-    allowed-headers: "*"
-    exposed-headers: "Authorization,Link,X-Total-Count"
-    allow-credentials: true
   http:
     cache: # Used by the CachingHttpHeadersFilter
       timeToLiveInDays: 1461
@@ -118,6 +112,28 @@ jhipster:
       host: localhost
       port: 5000
       ring-buffer-size: 512
+  # CORS configuration
+  cors:
+    allowed-origins: "*"
+    allowed-methods: "*"
+    allowed-headers: "*"
+    exposed-headers: "Authorization"
+    allow-credentials: true
+    max-age: 1800
+  # Swagger configuration
+  swagger:
+    default-include-pattern: /api/.*
+    title: JHipster API
+    description: JHipster API documentation
+    version: 0.0.1
+    terms-of-service-url:
+    contact-name:
+    contact-url:
+    contact-email:
+    license:
+    license-url:
+    host:
+    protocols:
 # ===================================================================
 # Application specific properties
 # Add your own application properties here, see the ApplicationProperties class
