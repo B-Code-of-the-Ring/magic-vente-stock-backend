@@ -121,19 +121,6 @@ jhipster:
     allow-credentials: true
     max-age: 1800
   # Swagger configuration
-  swagger:
-    default-include-pattern: /api/.*
-    title: JHipster API
-    description: JHipster API documentation
-    version: 0.0.1
-    terms-of-service-url:
-    contact-name:
-    contact-url:
-    contact-email:
-    license:
-    license-url:
-    host:
-    protocols:
 # ===================================================================
 # Application specific properties
 # Add your own application properties here, see the ApplicationProperties class
